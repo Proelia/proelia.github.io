@@ -3,169 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Portfolio | Layout Draft</title>
+    <title>Murray Webster | Sovereign Architect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #38bdf8;
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
+            --bg: #020408; --surface: #0d1117; --accent: #00f2ff;
+            --text-main: #e6edf3; --text-dim: #8b949e; --border: #30363d;
         }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; margin: 0; line-height: 1.6; }
+        .mono { font-family: 'Fira Code', monospace; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
+        /* --- Hero Section --- */
+        header { height: 80vh; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid var(--border); }
+        .hero-name { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; margin: 0; text-transform: uppercase; line-height: 0.9; }
+        .hero-sub { font-size: 1.4rem; color: var(--text-dim); margin-top: 1.5rem; max-width: 750px; border-left: 3px solid var(--accent); padding-left: 20px; }
 
-        header {
-            padding: 5rem 1rem;
-            text-align: center;
-            border-bottom: 1px solid #334155;
-        }
+        /* --- Hybrid Navigation Cards --- */
+        .module { margin: 4rem 0; }
+        details { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 2rem; transition: 0.3s; }
+        details[open] { border-color: var(--accent); }
+        summary { padding: 2.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
+        .summary-header h3 { margin: 0; font-size: 1.8rem; color: var(--accent); }
+        .summary-header p { margin: 0.5rem 0 0; color: var(--text-dim); }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+        .expansion-content { padding: 0 2.5rem 2.5rem; border-top: 1px solid var(--border); padding-top: 2rem; display: grid; grid-template-columns: 1fr 300px; gap: 3rem; }
+        .deep-link { display: inline-block; margin-top: 2rem; padding: 12px 24px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-family: 'Fira Code'; font-size: 0.8rem; transition: 0.3s; }
+        .deep-link:hover { background: var(--accent); color: var(--bg); }
 
-        /* The Project Card / Detail Logic */
-        .project-card {
-            background: var(--card-bg);
-            margin-bottom: 2rem;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #334155;
-            transition: transform 0.2s ease;
-        }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .tag { font-size: 0.7rem; background: #161b22; border: 1px solid var(--border); padding: 3px 8px; border-radius: 3px; color: var(--accent); }
 
-        summary {
-            padding: 1.5rem;
-            list-style: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        summary:hover { background: #243146; }
-
-        .summary-content h3 { margin: 0; color: var(--accent); }
-        .summary-content p { margin: 0.5rem 0 0; font-size: 0.95rem; color: var(--text-dim); }
-
-        /* The Expansion Animation Placeholder */
-        .details-expanded {
-            padding: 2rem;
-            background: #162030;
-            border-top: 1px solid #334155;
-        }
-
-        /* Layout for Content inside expansion */
-        .grid-layout {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        @media (min-width: 768px) {
-            .grid-layout { grid-template-columns: 1fr 1fr; }
-        }
-
-        .media-placeholder {
-            background: #0f172a;
-            border: 2px dashed #475569;
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-dim);
-            border-radius: 8px;
-        }
-
-        .tech-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .badge {
-            background: #334155;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        footer { text-align: center; padding: 4rem; color: var(--text-dim); font-size: 0.8rem; }
+        @media (max-width: 900px) { .expansion-content { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>[Name/Identity]</h1>
-    <p>Core Competencies & Professional Portfolio</p>
+<header class="container">
+    <div class="mono" style="color: var(--accent); margin-bottom: 1rem;">>> STATUS: INDEPENDENT_RESEARCHER // QLD_AU</div>
+    <h1 class="hero-name">Murray<br>Webster</h1>
+    <p class="hero-sub">Specializing in the intersection of <strong>Theoretical Physics</strong>, <strong>Autonomous AI Logic</strong>, and <strong>High-Performance Systems Resilience</strong>.</p>
 </header>
 
-<div class="container">
+<main class="container">
     
-    <details class="project-card">
-        <summary>
-            <div class="summary-content">
-                <h3>Project Title One</h3>
-                <p>One sentence summary of the project’s main achievement or goal.</p>
-            </div>
-            <span>[+]</span>
-        </summary>
-        
-        <div class="details-expanded">
-            <div class="grid-layout">
+    <div class="module">
+        <details>
+            <summary>
+                <div class="summary-header">
+                    <h3>01 // Theoretical Physics</h3>
+                    <p>Emergent Spacetime Flux Theory (ESFT).</p>
+                </div>
+                <div class="mono">SCAN_SUMMARY</div>
+            </summary>
+            <div class="expansion-content">
                 <div>
-                    <h4>Project Depth</h4>
-                    <p>This is where the long-form detail goes. You can explain workflows, problem-solving steps, and technical hurdles overcome.</p>
-                    <div class="tech-list">
-                        <span class="badge">Tool 1</span>
-                        <span class="badge">Tool 2</span>
-                        <span class="badge">Skill 3</span>
+                    <h4>Abstract</h4>
+                    <p>Proprietary framework modeling universal expansion as an emergent property of spacetime flux[cite: 24]. Utilizing Bayesian MCMC to test holographic scaling laws against the SPARC dataset.</p>
+                    <a href="projects/esft.html" class="deep-link">OPEN FULL RESEARCH DOSSIER &rarr;</a>
+                </div>
+                <div>
+                    <div class="tech-tags">
+                        <span class="tag">Python</span><span class="tag">MCMC</span><span class="tag">LaTeX</span><span class="tag">Cosmology</span>
                     </div>
                 </div>
-                <div class="media-placeholder">
-                    [Photo / Graph / Workflow Diagram]
-                </div>
             </div>
-        </div>
-    </details>
+        </details>
+    </div>
 
-    <details class="project-card">
-        <summary>
-            <div class="summary-content">
-                <h3>Project Title Two</h3>
-                <p>Brief overview of the technical system or certification.</p>
-            </div>
-            <span>[+]</span>
-        </summary>
-        <div class="details-expanded">
-            <div class="grid-layout">
-                <div class="media-placeholder">
-                    [Hardware Build Photo]
+    <div class="module">
+        <details>
+            <summary>
+                <div class="summary-header">
+                    <h3>02 // Autonomous AI Logic</h3>
+                    <p>Sovereign Edge-Link (SEL) & Universal Portable AI[cite: 1, 116].</p>
+                </div>
+                <div class="mono">SCAN_SUMMARY</div>
+            </summary>
+            <div class="expansion-content">
+                <div>
+                    <h4>System Architecture</h4>
+                    <p>Quad-Agent Neuro-Morphic AI featuring Executor, Strategist, Critic, and Synthesizer layers[cite: 116, 120]. Optimizing 7B parameter models for ARM/USB NPUs under 5A power draw[cite: 128].</p>
+                    <a href="projects/autonomous-ai.html" class="deep-link">INSPECT LOGIC ARCHITECTURE &rarr;</a>
                 </div>
                 <div>
-                    <h4>System Specifications</h4>
-                    <p>Detail the hardware configurations, OS choices, or deployment strategies used here.</p>
+                    <div class="tech-tags">
+                        <span class="tag">Multi-Agent</span><span class="tag">Ollama</span><span class="tag">NPU Optimization</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </details>
+        </details>
+    </div>
 
-</div>
+    <div class="module">
+        <details>
+            <summary>
+                <div class="summary-header">
+                    <h3>03 // Systems Engineering</h3>
+                    <p>Kernel Resilience & Advanced Hardware Recovery.</p>
+                </div>
+                <div class="mono">SCAN_SUMMARY</div>
+            </summary>
+            <div class="expansion-content">
+                <div>
+                    <h4>Case Study: Thermal & Boot Recovery</h4>
+                    <p>Bypassing BIOS-locked storage controllers via Thunderbolt 4 driver injection[cite: 72]. Manual kernel patching and NVMe power state optimization for 99.9% research uptime.</p>
+                    <a href="projects/systems-security.html" class="deep-link">REVIEW TECHNICAL CASE STUDIES &rarr;</a>
+                </div>
+                <div>
+                    <div class="tech-tags">
+                        <span class="tag">Kernel Patching</span><span class="tag">Chroot</span><span class="tag">NVMe Ops</span>
+                    </div>
+                </div>
+            </div>
+        </details>
+    </div>
 
-<footer>
-    &copy; 2026 | Built for GitHub Pages
+</main>
+
+<footer class="container" style="padding: 5rem 0; border-top: 1px solid var(--border); opacity: 0.5;">
+    <div class="mono" style="font-size: 0.8rem;">
+        // GITHUB_ACTIONS: ENABLED // LATEST_PUSH: APRIL_2026<br>
+        BUILD: SOVEREIGN_DASHBOARD_V5.1
+    </div>
 </footer>
 
 </body>
