@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio | Layout Draft</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            padding: 5rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* The Project Card / Detail Logic */
+        .project-card {
+            background: var(--card-bg);
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            transition: transform 0.2s ease;
+        }
+
+        summary {
+            padding: 1.5rem;
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        summary:hover { background: #243146; }
+
+        .summary-content h3 { margin: 0; color: var(--accent); }
+        .summary-content p { margin: 0.5rem 0 0; font-size: 0.95rem; color: var(--text-dim); }
+
+        /* The Expansion Animation Placeholder */
+        .details-expanded {
+            padding: 2rem;
+            background: #162030;
+            border-top: 1px solid #334155;
+        }
+
+        /* Layout for Content inside expansion */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid-layout { grid-template-columns: 1fr 1fr; }
+        }
+
+        .media-placeholder {
+            background: #0f172a;
+            border: 2px dashed #475569;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dim);
+            border-radius: 8px;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .badge {
+            background: #334155;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        footer { text-align: center; padding: 4rem; color: var(--text-dim); font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>[Name/Identity]</h1>
+    <p>Core Competencies & Professional Portfolio</p>
+</header>
+
+<div class="container">
+    
+    <details class="project-card">
+        <summary>
+            <div class="summary-content">
+                <h3>Project Title One</h3>
+                <p>One sentence summary of the project’s main achievement or goal.</p>
+            </div>
+            <span>[+]</span>
+        </summary>
+        
+        <div class="details-expanded">
+            <div class="grid-layout">
+                <div>
+                    <h4>Project Depth</h4>
+                    <p>This is where the long-form detail goes. You can explain workflows, problem-solving steps, and technical hurdles overcome.</p>
+                    <div class="tech-list">
+                        <span class="badge">Tool 1</span>
+                        <span class="badge">Tool 2</span>
+                        <span class="badge">Skill 3</span>
+                    </div>
+                </div>
+                <div class="media-placeholder">
+                    [Photo / Graph / Workflow Diagram]
+                </div>
+            </div>
+        </div>
+    </details>
+
+    <details class="project-card">
+        <summary>
+            <div class="summary-content">
+                <h3>Project Title Two</h3>
+                <p>Brief overview of the technical system or certification.</p>
+            </div>
+            <span>[+]</span>
+        </summary>
+        <div class="details-expanded">
+            <div class="grid-layout">
+                <div class="media-placeholder">
+                    [Hardware Build Photo]
+                </div>
+                <div>
+                    <h4>System Specifications</h4>
+                    <p>Detail the hardware configurations, OS choices, or deployment strategies used here.</p>
+                </div>
+            </div>
+        </div>
+    </details>
+
+</div>
+
+<footer>
+    &copy; 2026 | Built for GitHub Pages
+</footer>
+
+</body>
+</html>
