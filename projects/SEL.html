@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEL v4.0 Dossier | Sovereign Edge-Link Core</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #020408; --surface: #0d1117; --accent: #00f2ff;
+            --text-main: #e6edf3; --text-dim: #8b949e; --border: #30363d;
+            --critical: #f472b6; --logic-node: #161b22;
+        }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; margin: 0; line-height: 1.8; }
+        .mono { font-family: 'Fira Code', monospace; color: var(--accent); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        header { border-bottom: 2px solid var(--accent); padding-bottom: 3rem; margin-bottom: 4rem; }
+        .hero-title { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 900; margin: 0; text-transform: uppercase; line-height: 0.9; letter-spacing: -2px; }
+        .hero-sub { font-size: 1.2rem; color: var(--text-dim); margin-top: 1.5rem; border-left: 3px solid var(--critical); padding-left: 20px; max-width: 900px; }
+        section { margin-bottom: 6rem; }
+        h2 { font-size: 1.8rem; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; letter-spacing: 2px; display: flex; align-items: center; gap: 15px; }
+        h2::after { content: ''; flex-grow: 1; height: 1px; background: var(--border); }
+        .content-block { background: var(--surface); border: 1px solid var(--border); padding: 3rem; border-radius: 4px; margin-bottom: 2rem; position: relative; }
+        .content-block h3 { color: var(--critical); margin-top: 0; font-size: 1.6rem; text-transform: uppercase; letter-spacing: 1px; }
+        .brain-map-container { position: relative; padding: 6rem 2rem; margin: 3rem 0; display: flex; justify-content: center; align-items: center; }
+        .brain-grid { display: grid; grid-template-columns: 380px 380px; grid-template-rows: auto auto; gap: 10rem 12rem; position: relative; z-index: 2; }
+        .node { background: var(--logic-node); border: 2px solid var(--border); padding: 2rem; border-radius: 8px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; width: 380px; z-index: 3; }
+        .node:hover { border-color: var(--accent); transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 242, 255, 0.2); }
+        .sts-node { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 320px; background: #001a1c; border: 2px solid var(--accent); padding: 1.5rem; border-radius: 8px; z-index: 4; text-align: center; box-shadow: 0 0 20px var(--accent); }
+        .sts-node h4 { color: var(--accent); margin: 0 0 0.5rem; font-size: 1.2rem; text-transform: uppercase; }
+        .sts-node p { font-size: 0.8rem; line-height: 1.4; color: var(--text-main); margin: 0; }
+        .node h4 { color: var(--accent); margin: 0 0 1rem; font-size: 1.3rem; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .node p { font-size: 0.9rem; margin-bottom: 1rem; }
+        .node .detail-list { font-size: 0.85rem; color: var(--text-dim); padding-left: 1rem; }
+        .connector-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .line { stroke: var(--border); stroke-width: 2; transition: 0.3s; }
+        .node:hover ~ .connector-svg .line { stroke: var(--accent); stroke-width: 3; filter: drop-shadow(0 0 5px var(--accent)); }
+        .domain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
+        .domain-card { background: #161b22; border: 1px solid var(--border); padding: 2.5rem; border-radius: 4px; position: relative; transition: 0.3s; }
+        .domain-card:hover { border-color: var(--accent); }
+        .domain-card h3 { font-size: 1.4rem; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 1px; color: var(--accent); }
+        .domain-card p { font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .domain-card ul { padding-left: 1.2rem; }
+        .domain-card li { margin-bottom: 1rem; font-size: 0.95rem; list-style-type: square; }
+        .alignment-block { border-left: 4px solid var(--accent); padding-left: 2rem; margin-top: 4rem; }
+        .alignment-block h3 { color: var(--accent); text-transform: uppercase; font-size: 1.4rem; margin-bottom: 1rem; }
+        footer { padding: 4rem 0; border-top: 1px solid var(--border); opacity: 0.5; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="mono">>> SYSTEM_ID: SEL_V4.0_CORE // ARCHITECTURAL_MANIFEST</div>
+        <h1 class="hero-title">Sovereign<br>Edge-Link (SEL)</h1>
+        <p class="hero-sub">A decentralized, high-assurance neuro-morphic intelligence layer designed by an Australian Veteran to provide absolute autonomy to hardware platforms operating in denied, contested, and electromagnetically congested environments.</p>
+    </header>
+
+    <section>
+        <h2>01 // The Integrated Quad-Brain Concept</h2>
+        <div class="content-block">
+            <h3>Unified Neuro-Morphic Decision Logic</h3>
+            <p>SEL v4.0 represents the pinnacle of multi-agent cognitive architecture. Unlike singular probabilistic models that provide a single output, SEL utilizes four distinct neural agents that operate as a cohesive intelligence unit. This ensures that every action is a result of rigorous internal negotiation. By isolating instinctual reaction from strategic planning and regulatory oversight, SEL achieves a level of operational resilience that standard AI cannot match.</p>
+            <p>This cooperative logic engine weighs mission success against platform survival and legal necessity in microseconds. Each of the four models—the Executor, Strategist, Critic, and Synthesizer—is a specialized quantized 7B LLM tuned for specific domain logic. They engage in a high-speed adversarial loop, where proposals are stress-tested against hardware limits and mission briefs before a single line of machine code is ever generated.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>02 // Interconnectivity & Agent Specialization</h2>
+        <p>The Quad-Brain agents are deeply interconnected nodes. Every proposal from one agent is immediately analyzed, refined, or inhibited by the others in real-time through the Shared Thought Space hub.</p>
+
+        <div class="brain-map-container">
+            <svg class="connector-svg">
+                <line class="line" x1="25%" y1="25%" x2="50%" y2="50%" />
+                <line class="line" x1="75%" y1="25%" x2="50%" y2="50%" />
+                <line class="line" x1="25%" y1="75%" x2="50%" y2="50%" />
+                <line class="line" x1="75%" y1="75%" x2="50%" y2="50%" />
+                <line class="line" x1="75%" y1="25%" x2="75%" y2="75%" />
+            </svg>
+
+            <div class="brain-grid">
+                <div class="node">
+                    <h4>The Executor</h4>
+                    <p><strong>Parallel:</strong> Limbic System (Instinct & Reaction)</p>
+                    <div class="detail-list">
+                        • Processes raw high-frequency telemetry including GPS, IMU, and LIDAR.<br>
+                        • Proposes immediate tactical adjustments and survival maneuvers.<br>
+                        • Manages obstacle avoidance and real-time kinetic navigation in contested sectors.
+                    </div>
+                </div>
+
+                <div class="node">
+                    <h4>The Strategist</h4>
+                    <p><strong>Parallel:</strong> Neocortex (Rationality & Analysis)</p>
+                    <div class="detail-list">
+                        • Interprets high-level mission briefs and global strategic intent.<br>
+                        • Coordinates long-term planning, complex pattern recognition, and deception tactics.<br>
+                        • Provides "Mission Wisdom" to align tactics with overarching mission strategy.
+                    </div>
+                </div>
+
+                <div class="node">
+                    <h4>The Critic</h4>
+                    <p><strong>Parallel:</strong> Basal Ganglia (Action Selection & Inhibition)</p>
+                    <div class="detail-list">
+                        • Enforces Rules of Engagement (ROE) and legal/physical constraints.<br>
+                        • Ingests hardware data sheets to monitor thermal and power limits.<br>
+                        • Acts as the ultimate gatekeeper to inhibit hazardous commands or violations.
+                    </div>
+                </div>
+
+                <div class="node">
+                    <h4>The Synthesizer</h4>
+                    <p><strong>Parallel:</strong> Corpus Callosum (Integration & Communication)</p>
+                    <div class="detail-list">
+                        • Evaluates internal negotiations to find a final mission-ready consensus.<br>
+                        • Generates Dynamic M-Code for secure machine-level execution.<br>
+                        • Translates machine states into Natural Language for human situational awareness.
+                    </div>
+                </div>
+            </div>
+
+            <div class="sts-node">
+                <h4>Shared Thought Space (STS)</h4>
+                <p><strong>Unified Blackboard Architecture</strong></p>
+                <p>A zero-latency RAM-disk segment where all agents exist in simultaneous observation. Enables Hardware Interrupts (IRQ), allowing the Critic to flip a "kill-bit" that physically blocks prohibited commands before hardware execution.</p>
+            </div>
+        </div>
+
+        <div class="content-block">
+            <h3>The Architectural Backbone: STS Interconnectivity</h3>
+            <p>To support this high-level interconnectivity without the latency inherent in standard network protocols, SEL utilizes a Shared Thought Space (STS) built on a high-speed RAM-disk segment. This allows every agent to monitor the intent of the others instantaneously, mirroring the biological synchronization of the human brain. This ensures the "hand" does not move until the "eye" has confirmed the path.</p>
+            <p>The STS is the primary enabler for Hardware Interrupts (IRQ). Because the Critic monitors the Executor’s intent in the STS, it can flip a "kill-bit" to physically block a maneuver that would exceed structural or thermal limits before the command ever reaches the hardware execution layer. This ensures the platform is protected by its own logic layer in high-stress tactical scenarios.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>03 // Multi-Domain Sovereign Applications</h2>
+        <div class="domain-grid">
+            <div class="domain-card">
+                <h3>Military & Kinetic</h3>
+                <p>Engineered for high-ambiguity Grey Zone operations where cloud-reliant AI fails due to signal denial or capture risk.</p>
+                <ul>
+                    <li><strong>Littoral Signal Deception:</strong> Utilization of low-probability-of-intercept (LPI) optical signaling when RF jamming is detected.</li>
+                    <li><strong>Denial-of-Capture:</strong> Automated volatile memory wipes and scuttling upon detection of physical tampering or specialized electronic warfare.</li>
+                    <li><strong>Integrated Reconnaissance:</strong> Direct translation of human commands like "Clear the building" into multi-robot coordination for urban breach support.</li>
+                </ul>
+            </div>
+
+            <div class="domain-card">
+                <h3>Government & Resilience</h3>
+                <p>Removing dependencies on foreign infrastructure while providing massive "Force Multiplier" capabilities for national security.</p>
+                <ul>
+                    <li><strong>Persistent Border Monitoring:</strong> Autonomous long-range surveillance of maritime and land borders with 100% offline edge-inference.</li>
+                    <li><strong>Infrastructure Defense:</strong> Hardened logic for guarding sensitive installations, utilizing "Model Abliteration" to secure sovereign intellectual property.</li>
+                    <li><strong>Disaster Recovery:</strong> Deployable mobile command centers that act as local intelligence hubs for rescue efforts in communications-dark zones.</li>
+                </ul>
+            </div>
+
+            <div class="domain-card">
+                <h3>Commercial & Industrial</h3>
+                <p>Unlocking autonomous "Bounty-Driven" agentic services for sectors requiring precision and high-reliability logic.</p>
+                <ul>
+                    <li><strong>Precision Agriculture:</strong> Autonomous tracking and management of feral livestock, balancing data acquisition against battery survival.</li>
+                    <li><strong>Self-Deploying Mesh Networks:</strong> Swarms of units that decide optimal positioning to maintain private Wi-Fi connectivity for remote teams.</li>
+                    <li><strong>Atmospheric Awareness:</strong> Weather-adaptive logic that utilizes integrated barometers to prioritize safe-harbor behaviors before storm fronts.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-block" style="margin-top: 3rem;">
+            <h3>Platform Versatility & Digital Environments</h3>
+            <p>The SEL Quad-Brain is a platform-agnostic logic layer. While optimized for aerial and ground robotics, its architecture allows for integration into unmanned ground vehicles (UGVs), autonomous underwater vehicles (AUVs), and fixed sensor suites. Beyond physical hardware, SEL is capable of operating within pure digital environments as a high-assurance cyber-defense agent, negotiating network integrity against hostile intrusions in contested digital Grey Zones.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>04 // Strategic Alignment & Veteran Vision</h2>
+        <div class="alignment-block">
+            <h3>National Defence Alignment</h3>
+            <p>The Sovereign Edge-Link (SEL) v4.0 is purpose-built to meet the specific requirements of the Australian Defence Force and national security framework. As a project developed by an <strong>Australian Veteran</strong>, it understands the fundamental need for reliable, unhackable, and sovereign technology on the front line.</p>
+            
+            <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <p><strong>Detailed Sovereign Defence Industrial Priorities (SDIP):</strong></p>
+                    <ul>
+                        <li><strong>SDIP 6 - Integration & Enhancement:</strong> SEL meets the requirement for Automated Decision Aids designed to assist human decision-making while ensuring appropriate levels of human control.</li>
+                        <li><strong>Sovereign Security:</strong> By utilizing "abliterated" local models and hardened kernels, SEL mitigates the risk of security compromise to hardware or intellectual property.</li>
+                    </ul>
+                </div>
+                <div>
+                    <p><strong>Funding & Initiative Alignment:</strong></p>
+                    <ul>
+                        <li><strong>Asymmetric Warfighting:</strong> SEL transforms inexpensive, off-the-shelf hardware into high-assurance systems, aligning with Defence’s Modelling Complex Warfighting initiatives.</li>
+                        <li><strong>SDIP 7 - Test & Evaluation:</strong> The "Bilingual" translation layer ensures system-wide certification and safety compliance for mass-scale deployment of autonomous land materiel.</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top: 1.5rem; font-style: italic;">SEL represents a commitment to Australian sovereign capability, ensuring that our operators are supported by intelligence that is as resilient and independent as they are.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="mono">
+            // AUTHENTICATED: ADF VETERAN ADVISORY GROUP (QLD)<br>
+            // PREPARED: APRIL 2026 // CLASSIFICATION: MISSION CONFIDENTIAL // BUILD: SEL_V4.0_STABLE
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>
