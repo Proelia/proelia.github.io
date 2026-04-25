@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Murray Webster | Sovereign Architect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #020408; --surface: #0d1117; --accent: #00f2ff;
+            --text-main: #e6edf3; --text-dim: #8b949e; --border: #30363d;
+        }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; margin: 0; line-height: 1.6; }
+        .mono { font-family: 'Fira Code', monospace; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        /* --- Hero Section --- */
+        header { height: 70vh; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid var(--border); }
+        .hero-name { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; margin: 0; text-transform: uppercase; line-height: 0.9; }
+        .hero-sub { font-size: 1.2rem; color: var(--text-dim); margin-top: 1.5rem; max-width: 750px; border-left: 3px solid var(--accent); padding-left: 20px; }
+
+        /* --- Interactive Modules --- */
+        .module { margin: 2rem 0; }
+        details { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); overflow: hidden; }
+        details[open] { border-color: var(--accent); background: #0d1117; box-shadow: 0 10px 30px rgba(0, 242, 255, 0.05); }
+        
+        summary { padding: 2rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
+        summary::-webkit-details-marker { display: none; }
+        
+        .summary-header h3 { margin: 0; font-size: 1.6rem; color: var(--accent); letter-spacing: 1px; }
+        .summary-header p { margin: 0.3rem 0 0; color: var(--text-dim); font-size: 0.9rem; }
+
+        /* --- Polished Expansion Indicator --- */
+        .control-icon { width: 24px; height: 24px; position: relative; transition: transform 0.3s ease; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .control-icon::after { content: '+'; color: var(--accent); font-family: 'Fira Code'; font-size: 1.2rem; }
+        details[open] summary .control-icon { transform: rotate(45deg); border-color: var(--accent); }
+
+        /* --- Nested Project Layout --- */
+        .expansion-grid { padding: 0 2rem 2.5rem; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 2.5rem; padding-top: 2.5rem; }
+        
+        .project-item { display: grid; grid-template-columns: 1fr 280px; gap: 2rem; align-items: start; }
+        .project-info h4 { margin: 0 0 0.8rem; font-size: 1.2rem; color: #fff; }
+        .project-info p { margin: 0; font-size: 0.95rem; color: var(--text-dim); }
+
+        .project-action { display: flex; flex-direction: column; gap: 12px; }
+        .deep-link { display: block; text-align: center; padding: 10px 20px; border: 1px solid var(--border); color: var(--text-main); text-decoration: none; font-family: 'Fira Code'; font-size: 0.75rem; transition: 0.3s; border-radius: 2px; }
+        .deep-link:hover { border-color: var(--accent); color: var(--accent); background: rgba(0, 242, 255, 0.03); }
+
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { font-size: 0.65rem; background: #161b22; border: 1px solid var(--border); padding: 2px 8px; border-radius: 3px; color: var(--accent); text-transform: uppercase; }
+
+        @media (max-width: 850px) { 
+            .project-item { grid-template-columns: 1fr; gap: 1.5rem; }
+            .project-action { order: -1; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="container">
+    <div class="mono" style="color: var(--accent); margin-bottom: 1rem;">>> STATUS: INDEPENDENT_RESEARCHER // QLD_AU</div>
+    <h1 class="hero-name">Murray<br>Webster</h1>
+    <p class="hero-sub">Specializing in the intersection of <strong>Theoretical Physics</strong>, <strong>Autonomous AI Logic</strong>, and <strong>High-Performance Systems Resilience</strong>.</p>
+</header>
+
+<main class="container">
+    
+    <div class="module">
+        <details>
+            <summary>
+                <div class="summary-header">
+                    <h3>01 // Theoretical Physics</h3>
+                    <p>Alternative Cosmological Frameworks & Statistical Validation.</p>
+                </div>
+                <div class="control-icon"></div>
+            </summary>
+            <div class="expansion-grid">
+                <div class="project-item">
+                    <div class="project-info">
+                        <h4>Emergent Spacetime Flux Theory (ESFT)</h4>
+                        <p>A unified model replacing dark components with quantum flux dynamics[cite: 200, 201]. Formalized through modified Friedmann equations and Bayesian MCMC analysis against Pantheon+ datasets[cite: 16, 172].</p>
+                    </div>
+                    <div class="project-action">
+                        <div class="tech-tags">
+                            <span class="tag">Python</span><span class="tag">MCMC</span><span class="tag">Cosmology</span>
+                        </div>
+                        <a href="projects/esft.html" class="deep-link">OPEN ESFT DOSSIER &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="module">
+        <details>
+            <summary>
+                <div class="summary-header">
+                    <h3>02 // Autonomous AI Logic</h3>
+                    <p>Portable Neural Architectures & Multi-Agent Systems.</p>
+                </div>
+                <div class="control-icon"></div>
+            </summary>
+            <div class="expansion-grid">
+                <div class="project-item">
+                    <div class="project-info">
+                        <h4>Sovereign Edge-Link (SEL)</h4>
+                        <p>Developing quad-agent logic layers (Executor, Strategist, Critic, Synthesizer) for low-power NPU hardware. Focused on high-resilience, offline-first AI logic.</p>
+                    </div>
+                    <div class="project-action">
+                        <div class="tech-tags">
+                            <span class="tag">Multi-Agent</span><span class="tag">Ollama</span><span class="tag">NPU Ops</span>
+                        </div>
+                        <a href="projects/autonomous-ai.html" class="deep-link">INSPECT LOGIC &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="module">
+        <details>
+            <summary>
+                <div class="summary-header">
+                    <h3>03 // Systems Engineering</h3>
+                    <p>Kernel Resilience & Advanced Hardware Recovery.</p>
+                </div>
+                <div class="control-icon"></div>
+            </summary>
+            <div class="expansion-grid">
+                <div class="project-item">
+                    <div class="project-info">
+                        <h4>Thermal & Boot Recovery Frameworks</h4>
+                        <p>Advanced system restoration via Thunderbolt 4 driver injection and manual kernel patching. Engineered for 99.9% research environment uptime under extreme constraints.</p>
+                    </div>
+                    <div class="project-action">
+                        <div class="tech-tags">
+                            <span class="tag">Kernel Patching</span><span class="tag">NVMe Opt</span><span class="tag">Recovery</span>
+                        </div>
+                        <a href="projects/systems-security.html" class="deep-link">REVIEW CASE STUDIES &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </details>
+    </div>
+
+</main>
+
+<footer class="container" style="padding: 5rem 0; border-top: 1px solid var(--border); opacity: 0.5;">
+    <div class="mono" style="font-size: 0.8rem;">
+        // GITHUB_ACTIONS: ACTIVE // LATEST_PUSH: APRIL_2026<br>
+        BUILD: SOVEREIGN_DASHBOARD_V5.5_FINAL
+    </div>
+</footer>
+
+</body>
+</html>
