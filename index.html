@@ -1,132 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Murray Webster | Sovereign Architect</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #020408; --surface: #0d1117; --accent: #00f2ff;
-            --text-main: #e6edf3; --text-dim: #8b949e; --border: #30363d;
-        }
-        body { background: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; margin: 0; line-height: 1.6; }
-        .mono { font-family: 'Fira Code', monospace; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Murray Webster — local AI systems, multi-agent research, and physics. Brisbane / QLD, Australia.">
+  <title>Murray Webster · Vectis Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #05080f;
+      --surface: #0d121c;
+      --surface2: #121a28;
+      --accent: #00e5ff;
+      --accent-dim: rgba(0, 229, 255, 0.12);
+      --violet: #a78bfa;
+      --text: #e8eef7;
+      --muted: #8b9bb4;
+      --border: #243044;
+      --ok: #34d399;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(900px 500px at 10% -10%, rgba(0, 229, 255, 0.08), transparent 50%),
+        radial-gradient(700px 400px at 100% 0%, rgba(167, 139, 250, 0.08), transparent 45%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+    .mono { font-family: "Fira Code", ui-monospace, monospace; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
 
-        /* --- Hero Section --- */
-        header { height: 80vh; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid var(--border); }
-        .hero-name { font-size: clamp(3rem, 10vw, 6rem); font-weight: 900; margin: 0; text-transform: uppercase; line-height: 0.9; }
-        .hero-sub { font-size: 1.4rem; color: var(--text-dim); margin-top: 1.5rem; max-width: 750px; border-left: 3px solid var(--accent); padding-left: 20px; }
+    /* Nav */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 0; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(5, 8, 15, 0.85); backdrop-filter: blur(12px);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 0.75rem;
+      text-decoration: none; color: var(--text); font-weight: 700;
+    }
+    .brand-mark {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--violet));
+      color: #05080f; display: grid; place-items: center;
+      font-weight: 800; font-size: 0.95rem;
+    }
+    .nav-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    }
+    .nav-links a:hover { color: var(--accent); }
 
-        /* --- Hybrid Navigation Cards --- */
-        .module { margin: 4rem 0; }
-        details { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 2rem; transition: 0.3s; }
-        details[open] { border-color: var(--accent); }
-        summary { padding: 2.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; list-style: none; }
-        .summary-header h3 { margin: 0; font-size: 1.8rem; color: var(--accent); }
-        .summary-header p { margin: 0.5rem 0 0; color: var(--text-dim); }
+    /* Hero */
+    header.hero {
+      padding: 4.5rem 0 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .status {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.78rem; color: var(--accent); letter-spacing: 0.04em;
+      margin-bottom: 1.25rem;
+    }
+    .status::before {
+      content: ""; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--ok); box-shadow: 0 0 10px var(--ok);
+    }
+    h1 {
+      font-size: clamp(2.4rem, 7vw, 3.75rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      line-height: 1.05; margin: 0 0 1.25rem;
+    }
+    .hero-lead {
+      font-size: 1.15rem; color: var(--muted); max-width: 40rem;
+      border-left: 3px solid var(--accent); padding-left: 1.15rem; margin: 0;
+    }
+    .hero-lead strong { color: var(--text); font-weight: 600; }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.75rem;
+    }
+    .chip {
+      font-size: 0.75rem; font-weight: 600;
+      padding: 0.35rem 0.75rem; border-radius: 999px;
+      border: 1px solid var(--border); color: var(--muted);
+      background: var(--surface);
+    }
+    .chip.accent { border-color: rgba(0,229,255,0.35); color: var(--accent); background: var(--accent-dim); }
 
-        .expansion-content { padding: 0 2.5rem 2.5rem; border-top: 1px solid var(--border); padding-top: 2rem; display: grid; grid-template-columns: 1fr 300px; gap: 3rem; }
-        .deep-link { display: inline-block; margin-top: 2rem; padding: 12px 24px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-family: 'Fira Code'; font-size: 0.8rem; transition: 0.3s; }
-        .deep-link:hover { background: var(--accent); color: var(--bg); }
+    /* Section */
+    section { padding: 3.5rem 0; }
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin: 0 0 0.5rem;
+    }
+    .section-title { font-size: 1.65rem; font-weight: 700; margin: 0 0 0.75rem; }
+    .section-intro { color: var(--muted); max-width: 38rem; margin: 0 0 2rem; }
 
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-        .tag { font-size: 0.7rem; background: #161b22; border: 1px solid var(--border); padding: 3px 8px; border-radius: 3px; color: var(--accent); }
+    /* Project cards */
+    .projects { display: flex; flex-direction: column; gap: 1.25rem; }
+    details.card {
+      background: linear-gradient(165deg, var(--surface2), var(--surface));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    details.card[open], details.card:hover {
+      border-color: rgba(0, 229, 255, 0.35);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    }
+    summary {
+      list-style: none; cursor: pointer;
+      padding: 1.5rem 1.6rem;
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .card-head h3 {
+      margin: 0; font-size: 1.35rem; font-weight: 700;
+      color: var(--text);
+    }
+    .card-head .tagline { margin: 0.4rem 0 0; color: var(--muted); font-size: 0.98rem; }
+    .card-badge {
+      flex-shrink: 0; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid rgba(0,229,255,0.3);
+      padding: 0.35rem 0.65rem; border-radius: 6px;
+      background: var(--accent-dim);
+    }
+    .card-body {
+      padding: 0 1.6rem 1.6rem;
+      border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr minmax(180px, 240px); gap: 1.75rem;
+      padding-top: 1.35rem;
+    }
+    .card-body h4 {
+      margin: 0 0 0.5rem; font-size: 0.8rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); font-weight: 600;
+    }
+    .card-body p { margin: 0; color: var(--text); opacity: 0.92; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+    .tag {
+      font-size: 0.7rem; font-family: "Fira Code", monospace;
+      padding: 0.25rem 0.55rem; border-radius: 4px;
+      border: 1px solid var(--border); color: var(--accent);
+      background: rgba(0,0,0,0.25);
+    }
+    .btn {
+      display: inline-block; margin-top: 1.25rem;
+      padding: 0.7rem 1.15rem; border-radius: 8px;
+      border: 1px solid var(--accent); color: var(--accent);
+      text-decoration: none; font-family: "Fira Code", monospace;
+      font-size: 0.78rem; font-weight: 500; transition: 0.15s;
+    }
+    .btn:hover { background: var(--accent); color: var(--bg); }
 
-        @media (max-width: 900px) { .expansion-content { grid-template-columns: 1fr; } }
-    </style>
+    /* Trust strip */
+    .trust {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .trust-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.25rem 1.35rem;
+    }
+    .trust-item h3 { margin: 0 0 0.4rem; font-size: 0.95rem; }
+    .trust-item p { margin: 0; font-size: 0.88rem; color: var(--muted); }
+
+    /* About */
+    .about-grid {
+      display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; align-items: start;
+    }
+    .about-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+    }
+    .about-box p { margin: 0 0 0.85rem; color: var(--muted); }
+    .about-box p:last-child { margin-bottom: 0; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0 3.5rem;
+      color: var(--muted); font-size: 0.85rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 800px) {
+      .card-body, .about-grid, .trust { grid-template-columns: 1fr; }
+      header.hero { padding: 3rem 0 2.5rem; }
+    }
+  </style>
 </head>
 <body>
 
-<header class="container">
-    <div class="mono" style="color: var(--accent); margin-bottom: 1rem;">>> STATUS: INDEPENDENT_RESEARCHER // QLD_AU</div>
-    <h1 class="hero-name">Murray<br>Webster</h1>
-    <p class="hero-sub">Specializing in the intersection of <strong>Theoretical Physics</strong>, <strong>Autonomous AI Logic</strong>, and <strong>High-Performance Systems Resilience</strong>.</p>
-</header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="./">
+        <span class="brand-mark">V</span>
+        <span>Vectis Ops</span>
+      </a>
+      <div class="nav-links mono">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="https://github.com/vectisops" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </nav>
 
-<main class="container">
-    
-    <div class="module">
-        <details>
-            <summary>
-                <div class="summary-header">
-                    <h3>Sovereign Edge-Link (SEL)</h3>
-                    <p>Sovereign Edge-Link (SEL)</p>
-                </div>
-                <div class="mono">CLICK FOR INFO</div>
-            </summary>
-            <div class="expansion-content">
-                <div>
-                    <h4>System Architecture</h4>
-                    <p>Quad-Agent Neuro-Morphic AI featuring Executor, Strategist, Critic, and Synthesizer layers. Optimizing 7B parameter models for ARM/USB NPUs under 5A power draw.</p>
-                    <a href="projects/SEL.html" class="deep-link">INSPECT LOGIC ARCHITECTURE &rarr;</a>
-                </div>
-                <div>
-                    <div class="tech-tags">
-                        <span class="tag">Multi-Agent</span><span class="tag">Ollama</span><span class="tag">NPU Optimization</span>
-                    </div>
-                </div>
+    <header class="hero">
+      <div class="status mono">Independent builder · Brisbane / SEQ, Australia</div>
+      <h1>Murray Webster</h1>
+      <p class="hero-lead">
+        Engineer and researcher at the intersection of
+        <strong>local / multi-agent AI</strong>,
+        <strong>systems reliability</strong>, and
+        <strong>physics-inspired modelling</strong>.
+        I build things that run on hardware I control — then package them so others can too.
+      </p>
+      <div class="hero-meta">
+        <span class="chip accent">Local-first AI</span>
+        <span class="chip">Multi-agent systems</span>
+        <span class="chip">Edge / offline</span>
+        <span class="chip">Open tooling</span>
+      </div>
+    </header>
+
+    <section id="work">
+      <p class="section-label mono">// selected work</p>
+      <h2 class="section-title">Projects</h2>
+      <p class="section-intro">
+        Living research and software — not vapour. Each dossier is written honestly about maturity and limits.
+      </p>
+
+      <div class="projects">
+
+        <!-- SEL -->
+        <details class="card" open>
+          <summary>
+            <div class="card-head">
+              <h3>Sovereign Edge-Link (SEL)</h3>
+              <p class="tagline">Multi-agent architecture for offline / edge decision support</p>
             </div>
-        </details>
-    </div>
-
-     <div class="module">
-        <details>
-            <summary>
-                <div class="summary-header">
-                    <h3>Theoretical Physics</h3>
-                    <p>Emergent Spacetime Flux Theory (ESFT).</p>
-                </div>
-                <div class="mono">CLICK FOR INFO</div>
-            </summary>
-            <div class="expansion-content">
-                <div>
-                    <h4>Abstract</h4>
-                    <p>Proprietary framework modeling universal expansion as an emergent property of spacetime flux[cite: 24]. Utilizing Bayesian MCMC to test holographic scaling laws against the SPARC dataset.</p>
-                    <a href="projects/esft.html" class="deep-link">OPEN FULL RESEARCH DOSSIER &rarr;</a>
-                </div>
-                <div>
-                    <div class="tech-tags">
-                        <span class="tag">Python</span><span class="tag">MCMC</span><span class="tag">LaTeX</span><span class="tag">Cosmology</span>
-                    </div>
-                </div>
+            <span class="card-badge mono">Architecture</span>
+          </summary>
+          <div class="card-body">
+            <div>
+              <h4>Overview</h4>
+              <p>
+                SEL is a research architecture for specialised agents (Executor, Strategist, Critic, Synthesizer)
+                sharing state on the edge — aimed at denied or low-connectivity environments. Work focuses on
+                role separation, inhibition/gating, and practical loops on local models — not marketing “absolute autonomy.”
+              </p>
+              <a class="btn" href="projects/SEL.html">Read architecture dossier →</a>
             </div>
-        </details>
-    </div>
-
-    <div class="module">
-        <details>
-            <summary>
-                <div class="summary-header">
-                    <h3>Systems Engineering</h3>
-                    <p>Kernel Resilience & Advanced Hardware Recovery.</p>
-                </div>
-                <div class="mono">CLICK FOR INFO</div>
-            </summary>
-            <div class="expansion-content">
-                <div>
-                    <h4>Case Study: Thermal & Boot Recovery</h4>
-                    <p>Bypassing BIOS-locked storage controllers via Thunderbolt 4 driver injection[cite: 72]. Manual kernel patching and NVMe power state optimization for 99.9% research uptime.</p>
-                    <a href="projects/systems-security.html" class="deep-link">REVIEW TECHNICAL CASE STUDIES &rarr;</a>
-                </div>
-                <div>
-                    <div class="tech-tags">
-                        <span class="tag">Kernel Patching</span><span class="tag">Chroot</span><span class="tag">NVMe Ops</span>
-                    </div>
-                </div>
+            <div>
+              <h4>Stack</h4>
+              <div class="tags">
+                <span class="tag">Multi-agent</span>
+                <span class="tag">Ollama</span>
+                <span class="tag">Edge / NPU</span>
+                <span class="tag">Safety gates</span>
+              </div>
             </div>
+          </div>
         </details>
-    </div>
 
-</main>
+        <!-- Vespera (replaces systems listing) -->
+        <details class="card">
+          <summary>
+            <div class="card-head">
+              <h3>Vespera</h3>
+              <p class="tagline">Local AI operator stack — packaged for real deployment</p>
+            </div>
+            <span class="card-badge mono">Software</span>
+          </summary>
+          <div class="card-body">
+            <div>
+              <h4>Overview</h4>
+              <p>
+                Vespera is a Windows-first local AI platform: Ollama models, Control Center UI, optional voice/video,
+                90+ gated tools (shell, WSL, vision, OSINT, network lab, SDR/drone launchers), and a one-click installer
+                with profile wizard. Personality is optional — pure logic through custom roles. Built as a practical
+                lab that can seed multi-agent SEL nodes.
+              </p>
+              <a class="btn" href="projects/vespera.html">Open Vespera dossier →</a>
+            </div>
+            <div>
+              <h4>Stack</h4>
+              <div class="tags">
+                <span class="tag">Ollama</span>
+                <span class="tag">Python</span>
+                <span class="tag">Vision</span>
+                <span class="tag">OSINT</span>
+                <span class="tag">WSL</span>
+                <span class="tag">Installer</span>
+              </div>
+            </div>
+          </div>
+        </details>
 
-<footer class="container" style="padding: 5rem 0; border-top: 1px solid var(--border); opacity: 0.5;">
-    <div class="mono" style="font-size: 0.8rem;">
-        // GITHUB_ACTIONS: ENABLED // LATEST_PUSH: APRIL_2026<br>
-        BUILD: SOVEREIGN_DASHBOARD_V5.1 // Murray Webster
-    </div>
-</footer>
+        <!-- ESFT -->
+        <details class="card">
+          <summary>
+            <div class="card-head">
+              <h3>ESFT</h3>
+              <p class="tagline">Emergent Spacetime Flux Theory — physics research notes</p>
+            </div>
+            <span class="card-badge mono">Research</span>
+          </summary>
+          <div class="card-body">
+            <div>
+              <h4>Overview</h4>
+              <p>
+                Independent theoretical work exploring expansion and structure formation through a flux-based
+                spacetime model, with numerical checks (e.g. Bayesian MCMC) against public datasets such as SPARC.
+                Early-stage research — claims stay provisional until published validation.
+              </p>
+              <a class="btn" href="projects/esft.html">Open research dossier →</a>
+            </div>
+            <div>
+              <h4>Stack</h4>
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">MCMC</span>
+                <span class="tag">Cosmology</span>
+                <span class="tag">LaTeX</span>
+              </div>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <section>
+      <p class="section-label mono">// how I work</p>
+      <h2 class="section-title">Trust &amp; approach</h2>
+      <div class="trust">
+        <div class="trust-item">
+          <h3>Local-first</h3>
+          <p>Prefer models and tools that run on owner hardware. Cloud is optional, not required.</p>
+        </div>
+        <div class="trust-item">
+          <h3>Honest maturity</h3>
+          <p>Architecture and demos over hype. What’s shipped, what’s experimental, and what’s next — said plainly.</p>
+        </div>
+        <div class="trust-item">
+          <h3>Human in the loop</h3>
+          <p>High-risk actions use explicit allow/deny gates. Operators stay in control of shell, RF, and recon tools.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <p class="section-label mono">// about</p>
+      <h2 class="section-title">About Murray</h2>
+      <div class="about-grid">
+        <div>
+          <p style="color: var(--muted); margin: 0 0 1rem;">
+            Based in South East Queensland. Background across systems engineering, hands-on hardware,
+            and independent R&amp;D. Current focus: sovereign edge AI (SEL concepts) and Vespera —
+            turning LLM experiments into something a non-specialist can install and run.
+          </p>
+          <p style="color: var(--muted); margin: 0;">
+            This site is a living portfolio. Details evolve as the lab does.
+          </p>
+        </div>
+        <div class="about-box mono" style="font-size: 0.82rem;">
+          <p><span style="color: var(--accent);">LOCATION</span><br>Brisbane / SEQ · Australia</p>
+          <p><span style="color: var(--accent);">FOCUS</span><br>Local AI · Edge agents · Systems</p>
+          <p><span style="color: var(--accent);">GITHUB</span><br><a href="https://github.com/vectisops" style="color: var(--text);">github.com/vectisops</a></p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="mono">
+        Murray Webster · Vectis Ops · Updated July 2026<br>
+        <a href="https://github.com/vectisops/vectisops.github.io">Source</a>
+        · Independent research &amp; software — not a classified or commercial sales site
+      </div>
+    </footer>
+  </div>
 
 </body>
 </html>
