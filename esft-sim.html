@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESFT Core: Flux Topology Visualizer</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #05080f; color: #e8eef7; font-family: Inter, system-ui, sans-serif; }
+        #ui-panel { position: absolute; top: 20px; left: 20px; background: rgba(13, 18, 28, 0.85); padding: 20px; border-radius: 12px; border: 1px solid #243044; z-index: 100; backdrop-filter: blur(8px); }
+        h2 { margin: 0 0 10px 0; font-size: 16px; color: #00e5ff; font-family: "Fira Code", monospace; }
+        button { background-color: rgba(0, 229, 255, 0.12); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.3); padding: 8px 12px; margin-bottom: 8px; border-radius: 6px; cursor: pointer; width: 100%; font-family: "Fira Code", monospace; font-size: 12px; transition: 0.2s; }
+        button:hover { background-color: #00e5ff; color: #05080f; }
+        button.reset { background-color: rgba(218, 54, 51, 0.12); color: #da3633; border-color: rgba(218, 54, 51, 0.3); margin-top: 10px;}
+        button.reset:hover { background-color: #da3633; color: white; }
+        p { font-size: 12px; margin-bottom: 15px; color: #8b9bb4; }
+        #back-btn { position: absolute; top: 20px; right: 20px; text-decoration: none; color: #8b9bb4; font-family: "Fira Code", monospace; font-size: 12px; border: 1px solid #243044; padding: 8px 12px; border-radius: 6px; background: rgba(13, 18, 28, 0.85); z-index: 100; transition: 0.2s;}
+        #back-btn:hover { color: #00e5ff; border-color: rgba(0, 229, 255, 0.3); }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <a href="index.html" id="back-btn">← Back to Vectis Ops</a>
+
+    <div id="ui-panel">
+        <h2>ESFT Engine</h2>
+        <p>Live Flux Deformation Sim</p>
+        <button onclick="injectAnomaly(4)">Inject UAS Anomaly (Mass)</button>
+        <button onclick="injectAnomaly(-3)">Inject SDR Anomaly (Phase)</button>
+        <button class="reset" onclick="resetGrid()">Reset Topology</button>
+    </div>
+
+    <script>
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const gridSize = 50;
+        const geometry = new THREE.PlaneGeometry(100, 100, gridSize, gridSize);
+        const basePositions = new Float32Array(geometry.attributes.position.array);
+        
+        const material = new THREE.MeshBasicMaterial({ 
+            color: 0x00e5ff, 
+            wireframe: true,
+            transparent: true,
+            opacity: 0.4
+        });
+        const grid = new THREE.Mesh(geometry, material);
+        grid.rotation.x = -Math.PI / 2;
+        scene.add(grid);
+
+        camera.position.set(0, 40, 80);
+        camera.lookAt(0, 0, 0);
+
+        function injectAnomaly(intensity) {
+            const positions = geometry.attributes.position.array;
+            const targetX = (Math.random() - 0.5) * 80;
+            const targetY = (Math.random() - 0.5) * 80;
+            const radius = 15;
+
+            for (let i = 0; i < positions.length; i += 3) {
+                const vx = positions[i];
+                const vy = positions[i + 1];
+                const distance = Math.sqrt(Math.pow(vx - targetX, 2) + Math.pow(vy - targetY, 2));
+                
+                if (distance < radius) {
+                    const effect = intensity * Math.exp(-(Math.pow(distance, 2) / (2 * Math.pow(radius / 2, 2))));
+                    positions[i + 2] += effect; 
+                }
+            }
+            geometry.attributes.position.needsUpdate = true;
+        }
+
+        function resetGrid() {
+            const positions = geometry.attributes.position.array;
+            for (let i = 0; i < positions.length; i++) {
+                positions[i] = basePositions[i];
+            }
+            geometry.attributes.position.needsUpdate = true;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            grid.rotation.z += 0.001; 
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+        });
+    </script>
+</body>
+</html>
