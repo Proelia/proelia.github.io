@@ -33,6 +33,7 @@
     h1 { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.75rem; }
     .lead { font-size: 1.1rem; color: var(--muted); margin: 0 0 2rem; }
     h2 { font-size: 1.15rem; margin: 2.25rem 0 0.75rem; color: var(--accent); }
+    h3 { font-size: 0.95rem; margin: 1.35rem 0 0.5rem; color: var(--text); font-weight: 600; }
     p, li { color: var(--muted); }
     ul { padding-left: 1.2rem; }
     li { margin-bottom: 0.45rem; }
@@ -53,7 +54,7 @@
     }
     pre {
       background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-      padding: 1rem 1.1rem; overflow-x: auto; font-size: 0.8rem; color: var(--text);
+      padding: 1rem 1.1rem; overflow-x: auto; font-size: 0.78rem; color: var(--text);
       font-family: "Fira Code", monospace; line-height: 1.5;
     }
     table {
@@ -86,7 +87,7 @@
       Active. Multi-OS Python stack is the primary line of development.
       Legacy Windows PowerShell / WPF beta remains for reference.
       Tool packs degrade gracefully when optional backends are offline.
-      Personality is optional.
+      Personality is optional. Android remote client is in active production.
     </div>
 
     <h2>Purpose</h2>
@@ -158,17 +159,86 @@
       <div class="item"><strong>Security default</strong><span>Localhost binds; defensive net tools only</span></div>
     </div>
 
+    <h2>In development — Android remote client</h2>
+    <p>
+      A polished <strong style="color:var(--text)">Android frontend</strong> is in active production:
+      a Material 3 (Jetpack Compose) remote client that talks to your Vespera host over the LAN.
+      It is a thin operator UI — the heavy lifting stays on the desktop/laptop stack.
+    </p>
+    <div class="grid">
+      <div class="item"><strong>Chat over LAN</strong><span>Ollama API on the host (default port 11434)</span></div>
+      <div class="item"><strong>Persona picker</strong><span>Optional persona HTTP sidecar on the host</span></div>
+      <div class="item"><strong>Settings</strong><span>Host IP, ports, model selection</span></div>
+      <div class="item"><strong>Build path</strong><span>Kotlin / Compose source → debug APK via Android Studio or Gradle</span></div>
+    </div>
+    <div class="callout">
+      <strong style="color:var(--text)">Maturity:</strong>
+      Source and UI shell are in production use for lab testing. Distributed installables are built locally
+      (debug APK from Android Studio / <span class="mono">./gradlew assembleDebug</span>).
+      Prefer trusted Wi‑Fi or a private overlay (e.g. Tailscale); do not expose Ollama or persona ports on public networks.
+    </div>
+    <p>
+      Host side: keep Ollama reachable on the LAN only when you need the phone client, and run any persona
+      sidecar bound appropriately. Phone side: point Settings at the host LAN IP, then chat as usual.
+    </p>
+
     <h2>Quick start</h2>
+    <p>Requires a local <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a> install on every platform. Tool backends are optional — see <span class="mono">multi_os/docs/TOOLS.md</span>.</p>
+
+    <h3 class="mono">Linux</h3>
     <pre>git clone https://github.com/vectisops/Vespera.git
 cd Vespera/multi_os
-python -m venv .venv &amp;&amp; source .venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
+
+# Ensure Ollama is installed and running
+ollama serve   # if not already a service
+
+python -m vespera scan
+python -m vespera ui    # http://127.0.0.1:7860
+# or: python -m vespera tui</pre>
+
+    <h3 class="mono">macOS</h3>
+    <pre># Install Ollama from https://ollama.com (or: brew install ollama)
+# Python 3.10+ via python.org or Homebrew
+
+git clone https://github.com/vectisops/Vespera.git
+cd Vespera/multi_os
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
+ollama serve   # if the app is not already running
+
 python -m vespera scan
 python -m vespera ui    # http://127.0.0.1:7860</pre>
+    <p>Metal acceleration is handled by Ollama on Apple Silicon / supported Macs. No separate CUDA setup.</p>
+
+    <h3 class="mono">Windows</h3>
+    <pre># Install Ollama for Windows from https://ollama.com
+# Install Python 3.10+ from https://www.python.org (tick “Add to PATH”)
+
+git clone https://github.com/vectisops/Vespera.git
+cd Vespera\multi_os
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+
+python -m vespera scan
+python -m vespera ui
+# Browser → http://127.0.0.1:7860</pre>
     <p>
-      Requires a local <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a> install.
-      Tool setup is documented in-repo at <span class="mono">multi_os/docs/TOOLS.md</span>.
+      Native Python path is current. The older PowerShell / WPF Control Center and
+      <span class="mono">VesperaV1-Beta.rar</span> remain in the repo as legacy reference only.
     </p>
+
+    <h3 class="mono">Useful CLI</h3>
+    <pre>python -m vespera status
+python -m vespera personas
+python -m vespera chat "Hello"
+python -m vespera multi "Outline a local serving layout"
+python -m vespera tools</pre>
 
     <h2>Links</h2>
     <p>
@@ -181,6 +251,7 @@ python -m vespera ui    # http://127.0.0.1:7860</pre>
       <span class="tag">Python</span>
       <span class="tag">Gradio</span>
       <span class="tag">Textual</span>
+      <span class="tag">Android</span>
       <span class="tag">Linux</span>
       <span class="tag">macOS</span>
       <span class="tag">Windows</span>
