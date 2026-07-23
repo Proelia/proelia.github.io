@@ -36,7 +36,6 @@
     .mono { font-family: "Fira Code", ui-monospace, monospace; }
     .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
 
-    /* Nav */
     nav {
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.25rem 0; border-bottom: 1px solid var(--border);
@@ -59,7 +58,6 @@
     }
     .nav-links a:hover { color: var(--accent); }
 
-    /* Hero */
     header.hero {
       padding: 4.5rem 0 3.5rem;
       border-bottom: 1px solid var(--border);
@@ -94,7 +92,6 @@
     }
     .chip.accent { border-color: rgba(0,229,255,0.35); color: var(--accent); background: var(--accent-dim); }
 
-    /* Section */
     section { padding: 3.5rem 0; }
     .section-label {
       font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
@@ -103,7 +100,6 @@
     .section-title { font-size: 1.65rem; font-weight: 700; margin: 0 0 0.75rem; }
     .section-intro { color: var(--muted); max-width: 38rem; margin: 0 0 2rem; }
 
-    /* Project cards */
     .projects { display: flex; flex-direction: column; gap: 1.25rem; }
     details.card {
       background: linear-gradient(165deg, var(--surface2), var(--surface));
@@ -161,7 +157,6 @@
     }
     .btn:hover { background: var(--accent); color: var(--bg); }
 
-    /* Trust strip */
     .trust {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
       margin-top: 0.5rem;
@@ -173,7 +168,6 @@
     .trust-item h3 { margin: 0 0 0.4rem; font-size: 0.95rem; }
     .trust-item p { margin: 0; font-size: 0.88rem; color: var(--muted); }
 
-    /* About */
     .about-grid {
       display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; align-items: start;
     }
@@ -274,7 +268,7 @@
           <summary>
             <div class="card-head">
               <h3>Vespera</h3>
-              <p class="tagline">Local AI operator stack — packaged for real deployment</p>
+              <p class="tagline">Multi-OS local AI operator stack</p>
             </div>
             <span class="card-badge mono">Software</span>
           </summary>
@@ -282,10 +276,10 @@
             <div>
               <h4>Overview</h4>
               <p>
-                Vespera is a Windows-first local AI platform: Ollama models, Control Center UI, optional voice/video,
-                90+ gated tools (shell, WSL, vision, OSINT, network lab, SDR/drone launchers), and a one-click installer
-                with profile wizard. Personality is optional — pure logic through custom roles. Built as a practical
-                lab that can seed multi-agent SEL nodes.
+                Vespera is a local-first AI operator layer around Ollama: hardware-aware guidance,
+                markdown personas, multi-agent pipelines, Gradio and terminal UIs, and optional tool
+                backends for image/video generation, voice, web search, and network diagnostics.
+                Linux, macOS, and Windows. Open source under MIT.
               </p>
               <a class="btn" href="projects/vespera.html">Open Vespera dossier →</a>
             </div>
@@ -294,10 +288,11 @@
               <div class="tags">
                 <span class="tag">Ollama</span>
                 <span class="tag">Python</span>
-                <span class="tag">Vision</span>
-                <span class="tag">OSINT</span>
-                <span class="tag">WSL</span>
-                <span class="tag">Installer</span>
+                <span class="tag">Gradio</span>
+                <span class="tag">Tools</span>
+                <span class="tag">Linux</span>
+                <span class="tag">macOS</span>
+                <span class="tag">Windows</span>
               </div>
             </div>
           </div>
@@ -347,7 +342,7 @@
 
     <section>
       <p class="section-label mono">// how I work</p>
-      <h2 class="section-title">Trust &amp; approach</h2>
+      <h2 class="section-title">Trust & approach</h2>
       <div class="trust">
         <div class="trust-item">
           <h3>Local-first</h3>
@@ -371,8 +366,9 @@
         <div>
           <p style="color: var(--muted); margin: 0 0 1rem;">
             Based in South East Queensland. Background across systems engineering, hands-on hardware,
-            and independent R&amp;D. Current focus: sovereign edge AI (SEL concepts) and Vespera —
+            and independent R&D. Current focus: local multi-agent AI tooling and <strong style="color:var(--text)">Vespera</strong> —
             turning LLM experiments into something a non-specialist can install and run.
+            Separate research notes (e.g. edge multi-agent architecture) live in their own dossiers.
           </p>
           <p style="color: var(--muted); margin: 0;">
             This site is a living portfolio. Details evolve as the lab does.
@@ -390,7 +386,7 @@
       <div class="mono">
         Murray Webster · Vectis Ops · Updated July 2026<br>
         <a href="https://github.com/vectisops/vectisops.github.io">Source</a>
-        · Independent research &amp; software — not a classified or commercial sales site
+        · Independent research & software — not a classified or commercial sales site
       </div>
     </footer>
   </div>
