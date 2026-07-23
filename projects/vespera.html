@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Vespera — local AI operator stack by Murray Webster.">
+  <meta name="description" content="Vespera — multi-OS local AI operator stack by Murray Webster.">
   <title>Vespera · Vectis Ops</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -51,6 +51,19 @@
       font-size: 0.7rem; font-family: "Fira Code", monospace; padding: 0.25rem 0.55rem;
       border: 1px solid var(--border); border-radius: 4px; color: var(--accent);
     }
+    pre {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1rem 1.1rem; overflow-x: auto; font-size: 0.8rem; color: var(--text);
+      font-family: "Fira Code", monospace; line-height: 1.5;
+    }
+    table {
+      width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1rem 0;
+    }
+    th, td {
+      border: 1px solid var(--border); padding: 0.55rem 0.7rem; text-align: left;
+    }
+    th { color: var(--text); background: var(--surface); font-weight: 600; }
+    td { color: var(--muted); }
     footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); }
     @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
   </style>
@@ -62,55 +75,116 @@
     <div class="badge mono">Software · Local AI</div>
     <h1>Vespera</h1>
     <p class="lead">
-      A packaged local AI <strong style="color:var(--text)">operator stack</strong> —
-      models, tools, Control Center, and a one-click Windows installer.
-      Built after serious time with LLMs: not just notebooks, but something almost anyone can deploy.
+      A <strong style="color:var(--text)">multi-OS local AI operator stack</strong> —
+      models via Ollama, markdown personas, multi-agent orchestration,
+      Control Center (Gradio) and a pure-terminal TUI, plus optional tool backends.
+      Built to run on hardware you control — not a locked cloud chat box.
     </p>
 
     <div class="callout">
       <strong style="color:var(--text)">Status:</strong>
-      Active lab product. Core install, UI, tools, vision, OSINT, and network modules work.
-      Some packs (GPU face, full multi-agent SEL loop) are evolving. Personality is optional.
+      Active. Multi-OS Python stack is the primary line of development.
+      Legacy Windows PowerShell / WPF beta remains for reference.
+      Tool packs degrade gracefully when optional backends are offline.
+      Personality is optional.
     </div>
 
     <h2>Purpose</h2>
     <p>
-      Run capable AI on hardware you own. Prefer offline-first operation. Use real tools
-      (shell, WSL, vision, recon, lab apps) with human allow/deny gates — not a locked cloud chat box.
-      The same components can seed multi-agent SEL-style nodes (specialised roles, shared state, critic/inhibit).
+      Run capable language models and operator tools on owner-controlled machines.
+      Prefer offline-first operation after models are present. Expose extra capabilities
+      only through optional local backends and operator choice — default bind addresses assume localhost.
     </p>
 
     <h2>What it includes</h2>
     <div class="grid">
       <div class="item"><strong>Local models</strong><span>Ollama-hosted LLMs; swap tags anytime</span></div>
-      <div class="item"><strong>Control Center</strong><span>Dark web UI — chat, launch, tools, history</span></div>
-      <div class="item"><strong>Installer</strong><span>Python + Ollama check, wizard, optional packs</span></div>
-      <div class="item"><strong>90+ tools</strong><span>Shell, WSL root, files, GPU, network, more</span></div>
-      <div class="item"><strong>Vision</strong><span>YOLO + local face galleries + reverse-image path</span></div>
-      <div class="item"><strong>OSINT</strong><span>Domain/IP/user, Wayback, CT, EXIF, cases</span></div>
-      <div class="item"><strong>Network lab</strong><span>nmap/tshark via WSL, routes, TLS probes</span></div>
-      <div class="item"><strong>Lab hooks</strong><span>HackRF helpers; Betaflight, QGC, EdgeTX, DJI launchers</span></div>
+      <div class="item"><strong>Hardware prescan</strong><span>RAM / VRAM-aware quantisation guidance</span></div>
+      <div class="item"><strong>Personas</strong><span>Markdown system prompts; nested folders supported</span></div>
+      <div class="item"><strong>Multi-agent pipeline</strong><span>Strategist → Executor → Critic → Synthesizer</span></div>
+      <div class="item"><strong>Control Center</strong><span>Gradio web UI — chat, persona, model, hardware</span></div>
+      <div class="item"><strong>Terminal TUI</strong><span>Textual UI for headless / no-browser use</span></div>
+      <div class="item"><strong>CLI</strong><span>scan, status, personas, chat, multi, tools</span></div>
+      <div class="item"><strong>Optional tools</strong><span>Media, voice, search, network diagnostics</span></div>
     </div>
 
-    <h2>Profiles (not a fixed “character product”)</h2>
-    <ul>
-      <li><strong style="color:var(--text)">Pure logic</strong> — no persona; tools and reasoning only</li>
-      <li><strong style="color:var(--text)">Role templates</strong> — engineer, OSINT analyst, field operator</li>
-      <li><strong style="color:var(--text)">Custom</strong> — set goal, tone, and boundaries at install time</li>
-    </ul>
-    <p>Private companion setups stay private; they are not required to use the stack.</p>
+    <h2>Optional tool packs</h2>
+    <table>
+      <thead>
+        <tr><th>Pack</th><th>Capabilities</th><th>Typical backend</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--text)">Media</strong></td>
+          <td>Image generation; short video workflow queue</td>
+          <td>Automatic1111 (API); ComfyUI</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text)">Voice</strong></td>
+          <td>STT, TTS, STT→LLM→TTS turn</td>
+          <td>faster-whisper; Piper or Coqui</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text)">Search</strong></td>
+          <td>Web search</td>
+          <td>SearXNG or HTML fallback</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--text)">Network</strong></td>
+          <td>Connectivity, DNS, routes, local listeners</td>
+          <td>System tools — own / authorized networks only</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Tools are optional. If a backend is down, the rest of the stack still runs.</p>
 
-    <h2>Relation to SEL</h2>
+    <h2>Personas (public set)</h2>
+    <ul>
+      <li><strong style="color:var(--text)">Pure logic</strong> — structured analysis, minimal theatrics</li>
+      <li><strong style="color:var(--text)">OSINT analyst</strong> — open-source research framing</li>
+      <li><strong style="color:var(--text)">Operational planner</strong> — structured planning language</li>
+      <li><strong style="color:var(--text)">Multi-agent roles</strong> — strategist, executor, critic, synthesizer</li>
+    </ul>
     <p>
-      Vespera is the practical kit: models as brains, gated tools as actuators, logs/files as early shared state,
-      vision/net/SDR as sensors. SEL is the multi-agent architecture research layer on top —
-      Vespera is how you exercise those ideas on a real machine today.
+      Custom personas are plain markdown (optional YAML frontmatter for recommended models and VRAM notes).
+      Private role libraries are not required to use the stack.
+    </p>
+
+    <h2>Platforms</h2>
+    <div class="grid">
+      <div class="item"><strong>Linux</strong><span>Primary development target</span></div>
+      <div class="item"><strong>macOS</strong><span>Supported via Ollama / Metal</span></div>
+      <div class="item"><strong>Windows</strong><span>Native Python; legacy WPF beta archived</span></div>
+      <div class="item"><strong>Security default</strong><span>Localhost binds; defensive net tools only</span></div>
+    </div>
+
+    <h2>Quick start</h2>
+    <pre>git clone https://github.com/vectisops/Vespera.git
+cd Vespera/multi_os
+python -m venv .venv &amp;&amp; source .venv/bin/activate
+pip install -r requirements.txt
+python -m vespera scan
+python -m vespera ui    # http://127.0.0.1:7860</pre>
+    <p>
+      Requires a local <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a> install.
+      Tool setup is documented in-repo at <span class="mono">multi_os/docs/TOOLS.md</span>.
+    </p>
+
+    <h2>Links</h2>
+    <p>
+      <a href="https://github.com/vectisops/Vespera" target="_blank" rel="noopener">github.com/vectisops/Vespera</a>
+      · Multi-OS tree: <span class="mono">multi_os/</span>
     </p>
 
     <div class="tags">
-      <span class="tag">Ollama</span><span class="tag">Python</span><span class="tag">Windows</span>
-      <span class="tag">WSL</span><span class="tag">Vision</span><span class="tag">OSINT</span>
-      <span class="tag">Installer</span>
+      <span class="tag">Ollama</span>
+      <span class="tag">Python</span>
+      <span class="tag">Gradio</span>
+      <span class="tag">Textual</span>
+      <span class="tag">Linux</span>
+      <span class="tag">macOS</span>
+      <span class="tag">Windows</span>
+      <span class="tag">Tools</span>
     </div>
 
     <footer class="mono">
