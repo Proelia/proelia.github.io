@@ -3,27 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Sovereign Edge-Link (SEL) — multi-agent offline AI architecture by Murray Webster.">
+  <meta name="description" content="Sovereign Edge-Link (SEL) — plain-language dossier. AI that keeps working when the internet is gone.">
   <title>SEL · Vectis Ops</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #03060c; --surface: #0a1019; --accent: #00e5ff; --violet: #a78bfa;
-      --pink: #f472b6; --text: #e8eef7; --muted: #8b9bb4; --border: #1e2a3d;
+      --text: #e8eef7; --muted: #8b9bb4; --border: #1e2a3d;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
       background:
         radial-gradient(800px 400px at 0% 0%, rgba(0,229,255,.1), transparent 50%),
-        radial-gradient(600px 300px at 100% 20%, rgba(167,139,250,.08), transparent 45%),
+        radial-gradient(600px 300px at 100% 10%, rgba(167,139,250,.08), transparent 45%),
         var(--bg);
-      line-height: 1.65;
+      line-height: 1.7;
     }
     .mono { font-family: "Fira Code", monospace; }
-    .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 4rem; }
     a { color: var(--accent); }
-    nav { padding: 1.25rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+    nav { padding: 1.25rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
     nav a { text-decoration: none; color: var(--muted); font-size: 0.9rem; }
     nav a:hover { color: var(--accent); }
     .badge {
@@ -31,136 +31,119 @@
       color: var(--accent); border: 1px solid rgba(0,229,255,.35); padding: 0.3rem 0.7rem;
       border-radius: 999px; background: rgba(0,229,255,.08); margin-bottom: 1rem;
     }
-    h1 { font-size: clamp(2rem, 5vw, 2.85rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.75rem; }
-    .lead { font-size: 1.12rem; color: var(--muted); margin: 0 0 1.75rem; }
-    h2 { font-size: 1.15rem; margin: 2.4rem 0 0.75rem; color: var(--accent); }
-    h3 { font-size: 0.98rem; margin: 1.4rem 0 0.5rem; color: var(--text); font-weight: 600; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.75rem; }
+    .lead { font-size: 1.15rem; color: var(--muted); margin: 0 0 1.75rem; }
+    h2 { font-size: 1.2rem; margin: 2.4rem 0 0.85rem; color: var(--text); font-weight: 700; }
     p, li { color: var(--muted); }
-    ul { padding-left: 1.2rem; }
-    li { margin-bottom: 0.45rem; }
+    ul { padding-left: 1.25rem; }
+    li { margin-bottom: 0.55rem; }
     .callout {
-      border-left: 3px solid var(--accent); padding: 0.9rem 1.1rem; margin: 1.5rem 0;
+      border-left: 3px solid var(--accent); padding: 1rem 1.15rem; margin: 1.5rem 0;
       background: rgba(0,229,255,.05); border-radius: 0 10px 10px 0;
     }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 1rem 0; }
-    .item {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem;
-    }
-    .item strong { display: block; color: var(--text); margin-bottom: 0.25rem; font-size: 0.95rem; }
-    .item span { font-size: 0.85rem; color: var(--muted); }
-    .node-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin: 1.25rem 0;
-    }
-    .node {
+    .role {
       background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-      padding: 1.15rem 1.2rem; transition: border-color 0.2s, box-shadow 0.2s;
+      padding: 1.15rem 1.25rem; margin: 0.85rem 0;
     }
-    .node:hover { border-color: rgba(0,229,255,0.4); box-shadow: 0 0 28px rgba(0,229,255,0.08); }
-    .node h4 { margin: 0 0 0.4rem; color: var(--accent); font-size: 0.95rem; }
-    .node p { margin: 0; font-size: 0.88rem; }
-    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1.25rem 0 0; }
-    .tag {
-      font-size: 0.7rem; font-family: "Fira Code", monospace; padding: 0.25rem 0.55rem;
-      border: 1px solid var(--border); border-radius: 4px; color: var(--accent);
+    .role h3 { margin: 0 0 0.4rem; color: var(--accent); font-size: 1rem; }
+    .role p { margin: 0; font-size: 0.95rem; }
+    .btn {
+      display: inline-block; margin-top: 0.5rem; padding: 0.7rem 1.15rem; border-radius: 9px;
+      border: 1px solid var(--accent); color: var(--accent); text-decoration: none;
+      font-family: "Fira Code", monospace; font-size: 0.76rem; transition: 0.15s;
     }
+    .btn:hover { background: var(--accent); color: var(--bg); }
     footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); }
-    @media (max-width: 640px) { .grid, .node-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <nav class="mono"><a href="../">← Vectis Ops</a></nav>
+    <nav class="mono">
+      <a href="../">← Portfolio</a>
+      <a href="SEL-technical.html">Technical deep dive →</a>
+    </nav>
 
-    <div class="badge mono">Architecture · Research</div>
+    <div class="badge mono">Full dossier · Plain language</div>
     <h1>Sovereign Edge-Link (SEL)</h1>
     <p class="lead">
-      AI designed to keep working when the internet is gone — a small team of specialist roles
-      that plan, act, check safety, and agree before risky moves. Research-stage. Human control stays first-class.
+      A design for artificial intelligence that still works when there is no internet —
+      or when you cannot trust the cloud. Written for everyone, not only engineers.
     </p>
 
     <div class="callout">
-      <strong style="color:var(--text)">In one sentence:</strong>
-      SEL is a blueprint for offline multi-agent AI: four specialised minds share a fast local workspace,
-      argue, and only then act — so one runaway model cannot silently do something dangerous.
+      <strong style="color:var(--text)">The simple idea:</strong>
+      Most AI lives on distant servers. When the signal dies, that AI dies with it.
+      SEL is a plan for AI that lives on devices near you, with built-in safety checks,
+      so decisions stay under control even in hard places.
     </div>
 
-    <h2>Why it exists</h2>
+    <h2>Why this matters</h2>
     <p>
-      Cloud AI fails when signal is jammed, denied, or simply absent. SEL targets those environments:
-      edge devices, field systems, and contested networks where latency and sovereignty matter.
-      The design separates <em>reaction</em>, <em>planning</em>, <em>inhibition</em>, and <em>integration</em>
-      so safety gates are structural, not an afterthought.
+      Phones, cars, rescue teams, farms, and border systems sometimes operate where
+      coverage is weak, jammed, or deliberately cut. Tools that only work online are useless there.
+      SEL explores how to run a careful, multi-step decision process on local hardware instead.
     </p>
 
-    <h2>The four roles (plain + technical)</h2>
-    <div class="node-grid">
-      <div class="node">
-        <h4>Executor</h4>
-        <p>Fast reactions from sensors (GPS, motion, proximity). Proposes immediate moves. Analogous to instinctive response — high frequency, short horizon.</p>
-      </div>
-      <div class="node">
-        <h4>Strategist</h4>
-        <p>Reads mission intent and longer plans. Pattern recognition, prioritisation, deception-aware planning. Higher-level reasoning over the brief.</p>
-      </div>
-      <div class="node">
-        <h4>Critic</h4>
-        <p>Safety and rules gate. Enforces constraints (legal, thermal, power, ROE). Can inhibit or kill a proposal before hardware executes it.</p>
-      </div>
-      <div class="node">
-        <h4>Synthesizer</h4>
-        <p>Merges the debate into a single coherent output: machine-facing commands and human-readable status. Integration layer.</p>
-      </div>
-    </div>
-
-    <h2>Shared Thought Space (STS)</h2>
+    <h2>How the “team” works</h2>
     <p>
-      Agents do not only talk over slow network sockets. SEL assumes a high-speed shared workspace
-      (conceptually a RAM-backed blackboard) where each role can observe intent in near real time.
-      That enables hardware-level interrupts: the Critic can flip a kill-bit before a prohibited command
-      reaches actuators. Practical loops today are exercised through related lab tooling (see Vespera);
-      full STS hardware binding remains research maturity.
+      Instead of one giant AI doing everything, SEL imagines four specialist roles
+      that talk to each other before anything risky happens:
     </p>
 
-    <h2>Technical posture</h2>
-    <div class="grid">
-      <div class="item"><strong>Local models</strong><span>Quantised LLMs on edge / NPU-class hardware</span></div>
-      <div class="item"><strong>Role separation</strong><span>Act / plan / inhibit / integrate as distinct agents</span></div>
-      <div class="item"><strong>Inhibition first</strong><span>Safety is a gate, not a prompt suggestion</span></div>
-      <div class="item"><strong>Human in the loop</strong><span>High-risk actions remain operator-gated</span></div>
+    <div class="role">
+      <h3>The one that reacts</h3>
+      <p>Watches sensors and suggests quick moves — like dodging an obstacle or adjusting course. Fast, short-term thinking.</p>
+    </div>
+    <div class="role">
+      <h3>The one that plans</h3>
+      <p>Reads the bigger mission: where are we going, what are the priorities, what should we avoid long-term.</p>
+    </div>
+    <div class="role">
+      <h3>The one that says “no”</h3>
+      <p>Checks safety, rules, power limits, and legal constraints. Can block a bad idea before it reaches the real hardware.</p>
+    </div>
+    <div class="role">
+      <h3>The one that ties it together</h3>
+      <p>Listens to the others, settles on one clear decision, and explains it in a way both machines and people can understand.</p>
     </div>
 
-    <h2>Application domains (research framing)</h2>
+    <p>
+      They share a fast local “scratchpad” so they can see each other’s intent almost instantly.
+      The safety role can stop a command before motors, radios, or other hardware move.
+    </p>
+
+    <h2>What it is — and is not</h2>
     <ul>
-      <li><strong style="color:var(--text)">Denied / contested environments</strong> — where cloud-dependent stacks fail</li>
-      <li><strong style="color:var(--text)">Resilience &amp; border / infrastructure sensing</strong> — offline inference hubs</li>
-      <li><strong style="color:var(--text)">Industrial &amp; remote ops</strong> — battery-aware, weather-aware edge agents</li>
-      <li><strong style="color:var(--text)">Digital environments</strong> — same logic layer as a defensive coordination agent</li>
+      <li><strong style="color:var(--text)">It is</strong> a research architecture: a careful design for offline, multi-role AI with safety gates.</li>
+      <li><strong style="color:var(--text)">It is not</strong> a finished commercial product you can buy off a shelf today.</li>
+      <li><strong style="color:var(--text)">Human control stays important</strong> for high-risk actions — the design assumes people remain in charge of the serious decisions.</li>
     </ul>
 
-    <div class="callout">
-      <strong style="color:var(--text)">Honesty on maturity:</strong>
-      Architecture and role design are the mature artefacts. End-to-end hardware productisation,
-      certified ROE stacks, and production fleet deployment are not claimed as shipped product.
-    </div>
+    <h2>Where it might be useful one day</h2>
+    <ul>
+      <li>Places with no reliable network</li>
+      <li>Emergency and disaster response hubs that must keep thinking offline</li>
+      <li>Remote industrial or agricultural systems</li>
+      <li>Any setting where cloud dependence is a single point of failure</li>
+    </ul>
 
-    <h2>Related software</h2>
+    <h2>Related work you can try today</h2>
     <p>
-      Practical multi-agent loops and operator UIs are developed in the open through
-      <a href="vespera.html">Vespera</a> (local multi-OS stack). SEL is the architectural thesis;
-      Vespera is one concrete lab vehicle.
+      Some of the multi-agent ideas are exercised in open software through
+      <a href="vespera.html">Vespera</a> — a local AI assistant stack that runs on your own computer.
+      SEL is the broader design thesis; Vespera is one practical lab vehicle.
     </p>
 
-    <div class="tags">
-      <span class="tag">Multi-agent</span>
-      <span class="tag">Edge</span>
-      <span class="tag">Offline</span>
-      <span class="tag">Safety gates</span>
-      <span class="tag">Research</span>
+    <div class="callout">
+      <strong style="color:var(--text)">Want the engineering detail?</strong><br>
+      Role definitions, shared-memory concept, inhibition model, and research maturity notes live on the technical page.
+      <br><br>
+      <a class="btn" href="SEL-technical.html">Open technical deep dive →</a>
     </div>
 
     <footer class="mono">
       Murray Webster · Vectis Ops · July 2026<br>
-      <a href="../">Back to portfolio</a> · <a href="https://github.com/vectisops">GitHub</a>
+      <a href="../">Back to portfolio</a>
     </footer>
   </div>
 </body>

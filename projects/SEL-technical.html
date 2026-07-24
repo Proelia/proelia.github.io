@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SEL technical deep dive — multi-agent edge architecture, STS, inhibition model.">
+  <title>SEL Technical · Vectis Ops</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #03060c; --surface: #0a1019; --accent: #00e5ff; --violet: #a78bfa; --pink: #f472b6;
+      --text: #e8eef7; --muted: #8b9bb4; --border: #1e2a3d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
+      background:
+        radial-gradient(800px 400px at 0% 0%, rgba(0,229,255,.1), transparent 50%),
+        var(--bg);
+      line-height: 1.65;
+    }
+    .mono { font-family: "Fira Code", monospace; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    a { color: var(--accent); }
+    nav { padding: 1.25rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    nav a { text-decoration: none; color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--accent); }
+    .badge {
+      display: inline-block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--pink); border: 1px solid rgba(244,114,182,.4); padding: 0.3rem 0.7rem;
+      border-radius: 999px; background: rgba(244,114,182,.08); margin-bottom: 1rem;
+    }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.5rem); font-weight: 800; margin: 0 0 0.75rem; }
+    .lead { font-size: 1.05rem; color: var(--muted); margin: 0 0 1.75rem; }
+    h2 { font-size: 1.1rem; margin: 2.25rem 0 0.75rem; color: var(--accent); }
+    h3 { font-size: 0.95rem; margin: 1.25rem 0 0.45rem; color: var(--text); }
+    p, li { color: var(--muted); }
+    ul { padding-left: 1.2rem; }
+    li { margin-bottom: 0.4rem; }
+    .callout {
+      border-left: 3px solid var(--pink); padding: 0.9rem 1.1rem; margin: 1.5rem 0;
+      background: rgba(244,114,182,.06); border-radius: 0 10px 10px 0;
+    }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 1rem 0; }
+    .item {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem;
+    }
+    .item strong { display: block; color: var(--text); margin-bottom: 0.25rem; font-size: 0.92rem; }
+    .item span { font-size: 0.84rem; color: var(--muted); }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
+    .tag {
+      font-size: 0.68rem; font-family: "Fira Code", monospace; padding: 0.25rem 0.55rem;
+      border: 1px solid var(--border); border-radius: 4px; color: var(--accent);
+    }
+    footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="mono">
+      <a href="SEL.html">← Plain-language dossier</a>
+      <a href="../">Portfolio</a>
+    </nav>
+
+    <div class="badge mono">Technical deep dive</div>
+    <h1>SEL — architecture detail</h1>
+    <p class="lead">
+      Multi-agent edge architecture for offline / contested environments:
+      specialised roles, shared state, explicit inhibition. Research-stage.
+    </p>
+
+    <div class="callout">
+      <strong style="color:var(--text)">Scope:</strong>
+      This page is for engineers and researchers. For a non-technical overview, use the
+      <a href="SEL.html">plain-language dossier</a>.
+    </div>
+
+    <h2>Quad-agent model</h2>
+    <p>
+      SEL separates reaction, planning, inhibition, and integration into four agent roles.
+      Isolating these functions is intended to improve resilience versus a single unconstrained model.
+    </p>
+    <div class="grid">
+      <div class="item"><strong>Executor</strong><span>High-frequency telemetry (GPS/IMU/etc.); short-horizon tactical proposals</span></div>
+      <div class="item"><strong>Strategist</strong><span>Mission briefs, long-horizon planning, pattern recognition</span></div>
+      <div class="item"><strong>Critic</strong><span>ROE / legal / thermal / power constraints; proposal inhibition</span></div>
+      <div class="item"><strong>Synthesizer</strong><span>Consensus resolution; machine-facing commands + human-readable status</span></div>
+    </div>
+
+    <h2>Shared Thought Space (STS)</h2>
+    <p>
+      Agents observe a high-speed shared workspace (conceptual RAM-backed blackboard) rather than
+      relying only on high-latency message passing. This enables interrupt-style inhibition:
+      the Critic can assert a kill-bit before prohibited commands reach actuators.
+    </p>
+    <p>
+      Practical multi-agent loops today are exercised through related lab software (Vespera).
+      Full hardware-bound STS and certified interrupt paths remain research maturity.
+    </p>
+
+    <h2>Technical posture</h2>
+    <ul>
+      <li>Local / quantised LLMs on edge or NPU-class hardware</li>
+      <li>Role separation as a first-class architectural invariant</li>
+      <li>Inhibition as a structural gate, not prompt-only soft advice</li>
+      <li>Human-in-the-loop for high-risk action classes</li>
+    </ul>
+
+    <h2>Domain framing (research)</h2>
+    <ul>
+      <li>Denied / contested RF environments where cloud stacks fail</li>
+      <li>Offline sensing and resilience hubs</li>
+      <li>Remote industrial / agricultural edge agents</li>
+      <li>Digital coordination agents using the same logic layer</li>
+    </ul>
+
+    <h2>Maturity statement</h2>
+    <p>
+      Architecture and role design are the primary artefacts.
+      End-to-end productisation, formal certification, and fleet deployment are not claimed as shipped capability.
+      Related open software experimentation lives in the Vespera multi-OS stack.
+    </p>
+
+    <div class="tags">
+      <span class="tag">Multi-agent</span>
+      <span class="tag">Edge</span>
+      <span class="tag">STS</span>
+      <span class="tag">Inhibition</span>
+      <span class="tag">Research</span>
+    </div>
+
+    <footer class="mono">
+      Murray Webster · Vectis Ops · July 2026<br>
+      <a href="SEL.html">Plain dossier</a> · <a href="../">Portfolio</a>
+    </footer>
+  </div>
+</body>
+</html>

@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ESFT — Emergent Spacetime Flux Theory. Independent cosmology research by Murray Webster.">
+  <meta name="description" content="ESFT plain-language dossier — a different idea about how the universe expands.">
   <title>ESFT · Vectis Ops</title>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -19,12 +18,12 @@
         radial-gradient(800px 400px at 0% 0%, rgba(0,229,255,.1), transparent 50%),
         radial-gradient(600px 300px at 100% 10%, rgba(167,139,250,.08), transparent 45%),
         var(--bg);
-      line-height: 1.65;
+      line-height: 1.7;
     }
     .mono { font-family: "Fira Code", monospace; }
-    .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 4rem; }
     a { color: var(--accent); }
-    nav { padding: 1.25rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+    nav { padding: 1.25rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
     nav a { text-decoration: none; color: var(--muted); font-size: 0.9rem; }
     nav a:hover { color: var(--accent); }
     .badge {
@@ -32,122 +31,94 @@
       color: var(--accent); border: 1px solid rgba(0,229,255,.35); padding: 0.3rem 0.7rem;
       border-radius: 999px; background: rgba(0,229,255,.08); margin-bottom: 1rem;
     }
-    h1 { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.75rem; }
-    .lead { font-size: 1.12rem; color: var(--muted); margin: 0 0 1.75rem; }
-    h2 { font-size: 1.15rem; margin: 2.4rem 0 0.75rem; color: var(--accent); }
-    h3 { font-size: 0.98rem; margin: 1.4rem 0 0.5rem; color: var(--text); font-weight: 600; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.5rem); font-weight: 800; margin: 0 0 0.75rem; }
+    .lead { font-size: 1.15rem; color: var(--muted); margin: 0 0 1.75rem; }
+    h2 { font-size: 1.2rem; margin: 2.4rem 0 0.85rem; color: var(--text); font-weight: 700; }
     p, li { color: var(--muted); }
-    ul { padding-left: 1.2rem; }
-    li { margin-bottom: 0.45rem; }
+    ul { padding-left: 1.25rem; }
+    li { margin-bottom: 0.55rem; }
     .callout {
-      border-left: 3px solid var(--accent); padding: 0.9rem 1.1rem; margin: 1.5rem 0;
+      border-left: 3px solid var(--accent); padding: 1rem 1.15rem; margin: 1.5rem 0;
       background: rgba(0,229,255,.05); border-radius: 0 10px 10px 0;
     }
-    .formula {
-      background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent);
-      border-radius: 0 10px 10px 0; padding: 1.1rem 1.2rem; margin: 1.25rem 0; text-align: center;
-      overflow-x: auto;
+    .btn {
+      display: inline-block; margin-top: 0.5rem; padding: 0.7rem 1.15rem; border-radius: 9px;
+      border: 1px solid var(--accent); color: var(--accent); text-decoration: none;
+      font-family: "Fira Code", monospace; font-size: 0.76rem;
     }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 1rem 0; }
-    .item {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem;
-    }
-    .item strong { display: block; color: var(--text); margin-bottom: 0.25rem; font-size: 0.95rem; }
-    .item span { font-size: 0.85rem; color: var(--muted); }
-    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1.25rem 0 0; }
-    .tag {
-      font-size: 0.7rem; font-family: "Fira Code", monospace; padding: 0.25rem 0.55rem;
-      border: 1px solid var(--border); border-radius: 4px; color: var(--accent);
-    }
+    .btn:hover { background: var(--accent); color: var(--bg); }
     footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); }
-    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <nav class="mono"><a href="../">← Vectis Ops</a></nav>
+    <nav class="mono">
+      <a href="../">← Portfolio</a>
+      <a href="esft-technical.html">Technical deep dive →</a>
+    </nav>
 
-    <div class="badge mono">Research · Cosmology</div>
+    <div class="badge mono">Full dossier · Plain language</div>
     <h1>Emergent Spacetime Flux Theory</h1>
     <p class="lead">
-      Independent physics research exploring whether the expanding universe and its structure
-      can be described with a dynamic “flux” picture of spacetime — without leaning only on unseen dark components.
-      Early-stage. Claims stay provisional.
+      Independent research exploring a different way to think about how the universe expands
+      and forms structure — written so non-specialists can follow the idea.
     </p>
 
     <div class="callout">
-      <strong style="color:var(--text)">In one sentence:</strong>
-      ESFT treats spacetime as an emergent energetic medium; gravity as flow, time as local dissipation,
-      and accelerated expansion as the cumulative effect of microscopic motion “eddies” in that medium.
+      <strong style="color:var(--text)">The simple idea:</strong>
+      Much of modern cosmology explains the universe with “dark” ingredients we have not seen directly.
+      ESFT asks whether spacetime itself can be pictured as a kind of energetic medium — a flux —
+      and whether gravity, time, and expansion can be read as behaviour of that medium.
     </div>
 
-    <h2>The problem it tries to address</h2>
+    <h2>What problem is it aiming at?</h2>
     <p>
-      Standard cosmology explains most of the universe’s energy budget with dark matter and dark energy —
-      components that are not directly observed. ESFT asks whether a flux-based spacetime model can
-      reproduce key expansion history without treating those components as fundamental.
+      Textbooks often say most of the universe is dark matter and dark energy.
+      Those labels work well in equations, but they are placeholders for things we have not observed
+      the way we observe stars and gas. ESFT is one independent attempt to explore alternatives
+      grounded in a fluid-like picture of spacetime.
     </p>
 
-    <h2>Core ideas (technical)</h2>
-    <h3>Gravity as flux flow</h3>
-    <p>
-      Masses induce density gradients in the flux substrate. “Gravity” is the directed flow that
-      redistributes energy toward lower gradients — a fluid analogue rather than primary geometric curvature.
-    </p>
-    <div class="formula">$$\mathbf{v} \propto -\nabla \rho$$</div>
-
-    <h3>Time as energy gradient</h3>
-    <p>
-      Local time is linked to the rate of energy dissipation in the flux,
-      giving a physical reading of the arrow of time as the medium’s tendency to flatten gradients.
-    </p>
-
-    <h3>Expansion via eddies</h3>
-    <p>
-      Microscopic gravitational “eddies” from baryonic motion (from atomic scales upward) are treated
-      as a cumulative energy term that can drive effective expansion of the medium.
-    </p>
-    <div class="formula">$$H^2 = \frac{8\pi G}{3c^2} (\rho_m + \rho_r + \rho_{eddy})$$</div>
-
-    <h2>How it was checked so far</h2>
+    <h2>Three everyday metaphors</h2>
     <ul>
-      <li><strong style="color:var(--text)">Bayesian MCMC</strong> — parameter estimation (e.g. density terms) with libraries such as <span class="mono">emcee</span></li>
-      <li><strong style="color:var(--text)">Public datasets</strong> — fits against supernova compilations (e.g. Pantheon+) and related cosmological probes</li>
-      <li><strong style="color:var(--text)">Model comparison</strong> — information criteria (e.g. AIC) to compare goodness-of-fit against baseline histories</li>
+      <li><strong style="color:var(--text)">Gravity as flow</strong> — masses create “slopes” in the medium; things move as the medium redistributes.</li>
+      <li><strong style="color:var(--text)">Time as change in energy</strong> — local time is tied to how the medium settles and dissipates.</li>
+      <li><strong style="color:var(--text)">Expansion as many tiny swirls</strong> — ordinary motion throughout the cosmos adds up to a swelling effect in the medium.</li>
     </ul>
+    <p>These are research metaphors, not proven facts.</p>
+
+    <h2>Has it been tested?</h2>
     <p>
-      Early numerical work suggests the framework can track broad expansion history comparable to ΛCDM
-      in the regimes tested; distinctive high-redshift predictions remain the interesting test cases.
+      Early numerical work compares the model to public astronomical datasets
+      (for example supernova distance data) using statistical fitting methods.
+      So far, the work suggests it can track broad expansion history in the regimes checked.
+      That is a starting point, not a final victory.
     </p>
 
     <div class="callout">
-      <strong style="color:var(--text)">Status:</strong>
-      Research notes and numerical experiments — not a published peer-reviewed theory of everything.
-      Treat every claim as provisional until independent replication and formal publication.
+      <strong style="color:var(--text)">Honest status:</strong>
+      This is early-stage independent research. It is not peer-reviewed gospel.
+      Every claim should be treated as provisional until stronger, independent validation.
     </div>
 
-    <h2>Speculative application threads</h2>
-    <div class="grid">
-      <div class="item"><strong>Navigation &amp; timing ideas</strong><span>Exploring clock–energy correlations in GNSS-denied settings (speculative)</span></div>
-      <div class="item"><strong>Metrology</strong><span>Ultra-sensitive force / field measurement concepts</span></div>
-      <div class="item"><strong>Quantum environment models</strong><span>Background “eddy” noise as a modelling lens (speculative)</span></div>
-      <div class="item"><strong>Simulation</strong><span>Interactive topology demo on the portfolio (visual aid only)</span></div>
-    </div>
+    <h2>What it is not</h2>
+    <ul>
+      <li>Not a finished theory of everything</li>
+      <li>Not a product or investment pitch</li>
+      <li>Not a claim that dark matter “doesn’t exist” as an observational phenomenon — the project is about modelling frameworks</li>
+    </ul>
 
-    <p>
-      Application ideas are forward-looking sketches, not product claims.
-    </p>
-
-    <div class="tags">
-      <span class="tag">Cosmology</span>
-      <span class="tag">Bayesian MCMC</span>
-      <span class="tag">Python</span>
-      <span class="tag">Early research</span>
+    <div class="callout">
+      <strong style="color:var(--text)">Want equations and methods?</strong><br>
+      Flux definitions, Friedmann-style forms, MCMC fitting notes, and speculative application threads
+      are on the technical page.
+      <br><br>
+      <a class="btn" href="esft-technical.html">Open technical deep dive →</a>
     </div>
 
     <footer class="mono">
       Murray Webster · Vectis Ops · July 2026<br>
-      <a href="../">Back to portfolio</a> · <a href="https://github.com/vectisops">GitHub</a>
+      <a href="../">Back to portfolio</a>
     </footer>
   </div>
 </body>
