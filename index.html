@@ -3,179 +3,254 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Murray Webster — local AI systems, multi-agent research, and physics. Brisbane / QLD, Australia.">
+  <meta name="description" content="Murray Webster — local AI, offline systems, and independent research. Brisbane / QLD, Australia.">
   <title>Murray Webster · Vectis Ops</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #05080f;
-      --surface: #0d121c;
-      --surface2: #121a28;
+      --bg: #03060c;
+      --surface: #0a1019;
+      --surface2: #0f1724;
       --accent: #00e5ff;
-      --accent-dim: rgba(0, 229, 255, 0.12);
+      --accent-glow: rgba(0, 229, 255, 0.45);
+      --accent-dim: rgba(0, 229, 255, 0.1);
       --violet: #a78bfa;
+      --violet-glow: rgba(167, 139, 250, 0.25);
+      --pink: #f472b6;
       --text: #e8eef7;
       --muted: #8b9bb4;
-      --border: #243044;
+      --border: #1e2a3d;
       --ok: #34d399;
-      --radius: 12px;
+      --radius: 14px;
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: Inter, system-ui, sans-serif;
-      background:
-        radial-gradient(900px 500px at 10% -10%, rgba(0, 229, 255, 0.08), transparent 50%),
-        radial-gradient(700px 400px at 100% 0%, rgba(167, 139, 250, 0.08), transparent 45%),
-        var(--bg);
+      background: var(--bg);
       color: var(--text);
       line-height: 1.65;
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 15% -10%, rgba(0, 229, 255, 0.12), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 95% 5%, rgba(167, 139, 250, 0.1), transparent 50%),
+        radial-gradient(ellipse 50% 30% at 50% 100%, rgba(244, 114, 182, 0.05), transparent 50%);
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.03;
+      background-image:
+        linear-gradient(rgba(0, 229, 255, 0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.4) 1px, transparent 1px);
+      background-size: 48px 48px;
     }
     .mono { font-family: "Fira Code", ui-monospace, monospace; }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1; }
 
     nav {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.25rem 0; border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 20;
-      background: rgba(5, 8, 15, 0.85); backdrop-filter: blur(12px);
+      padding: 1.15rem 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(3, 6, 12, 0.82);
+      backdrop-filter: blur(16px);
     }
     .brand {
       display: flex; align-items: center; gap: 0.75rem;
       text-decoration: none; color: var(--text); font-weight: 700;
     }
     .brand-mark {
-      width: 36px; height: 36px; border-radius: 10px;
+      width: 38px; height: 38px; border-radius: 11px;
       background: linear-gradient(135deg, var(--accent), var(--violet));
-      color: #05080f; display: grid; place-items: center;
-      font-weight: 800; font-size: 0.95rem;
+      color: #03060c; display: grid; place-items: center;
+      font-weight: 800; font-size: 1rem;
+      box-shadow: 0 0 24px var(--accent-glow);
     }
-    .nav-links { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .nav-links { display: flex; gap: 1.35rem; flex-wrap: wrap; }
     .nav-links a {
-      color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500;
+      transition: color 0.15s;
     }
     .nav-links a:hover { color: var(--accent); }
 
     header.hero {
-      padding: 4.5rem 0 3.5rem;
+      padding: 5rem 0 4rem;
       border-bottom: 1px solid var(--border);
+      position: relative;
     }
     .status {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-size: 0.78rem; color: var(--accent); letter-spacing: 0.04em;
-      margin-bottom: 1.25rem;
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-size: 0.76rem; color: var(--accent); letter-spacing: 0.06em;
+      margin-bottom: 1.35rem;
+      text-transform: uppercase;
     }
     .status::before {
-      content: ""; width: 8px; height: 8px; border-radius: 50%;
-      background: var(--ok); box-shadow: 0 0 10px var(--ok);
+      content: ""; width: 9px; height: 9px; border-radius: 50%;
+      background: var(--ok);
+      box-shadow: 0 0 12px var(--ok), 0 0 24px rgba(52, 211, 153, 0.4);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.55; }
     }
     h1 {
-      font-size: clamp(2.4rem, 7vw, 3.75rem);
-      font-weight: 800; letter-spacing: -0.03em;
-      line-height: 1.05; margin: 0 0 1.25rem;
+      font-size: clamp(2.6rem, 8vw, 4rem);
+      font-weight: 800; letter-spacing: -0.035em;
+      line-height: 1.02; margin: 0 0 1.35rem;
+      background: linear-gradient(120deg, #fff 30%, var(--accent) 90%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .hero-lead {
-      font-size: 1.15rem; color: var(--muted); max-width: 40rem;
-      border-left: 3px solid var(--accent); padding-left: 1.15rem; margin: 0;
+      font-size: 1.18rem; color: var(--muted); max-width: 42rem;
+      border-left: 3px solid var(--accent);
+      padding-left: 1.25rem; margin: 0;
+      box-shadow: -4px 0 20px -8px var(--accent-glow);
     }
     .hero-lead strong { color: var(--text); font-weight: 600; }
     .hero-meta {
-      display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.75rem;
+      display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 2rem;
     }
     .chip {
-      font-size: 0.75rem; font-weight: 600;
-      padding: 0.35rem 0.75rem; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 600;
+      padding: 0.4rem 0.85rem; border-radius: 999px;
       border: 1px solid var(--border); color: var(--muted);
       background: var(--surface);
+      transition: border-color 0.2s, color 0.2s;
     }
-    .chip.accent { border-color: rgba(0,229,255,0.35); color: var(--accent); background: var(--accent-dim); }
+    .chip:hover { border-color: rgba(0,229,255,0.4); color: var(--accent); }
+    .chip.accent {
+      border-color: rgba(0,229,255,0.4); color: var(--accent);
+      background: var(--accent-dim);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.12);
+    }
 
-    section { padding: 3.5rem 0; }
+    section { padding: 4rem 0; }
     .section-label {
-      font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--accent); font-weight: 600; margin: 0 0 0.5rem;
+      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin: 0 0 0.55rem;
     }
-    .section-title { font-size: 1.65rem; font-weight: 700; margin: 0 0 0.75rem; }
-    .section-intro { color: var(--muted); max-width: 38rem; margin: 0 0 2rem; }
+    .section-title {
+      font-size: 1.75rem; font-weight: 700; margin: 0 0 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .section-intro { color: var(--muted); max-width: 40rem; margin: 0 0 2.25rem; }
 
-    .projects { display: flex; flex-direction: column; gap: 1.25rem; }
+    .projects { display: flex; flex-direction: column; gap: 1.15rem; }
     details.card {
-      background: linear-gradient(165deg, var(--surface2), var(--surface));
+      background: linear-gradient(160deg, var(--surface2) 0%, var(--surface) 100%);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
     }
-    details.card[open], details.card:hover {
-      border-color: rgba(0, 229, 255, 0.35);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+    details.card:hover {
+      border-color: rgba(0, 229, 255, 0.3);
+      box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.08), 0 16px 48px rgba(0, 0, 0, 0.4);
+    }
+    details.card[open] {
+      border-color: rgba(0, 229, 255, 0.45);
+      box-shadow: 0 0 40px rgba(0, 229, 255, 0.08), 0 20px 50px rgba(0, 0, 0, 0.45);
     }
     summary {
       list-style: none; cursor: pointer;
-      padding: 1.5rem 1.6rem;
+      padding: 1.45rem 1.55rem;
       display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
     }
     summary::-webkit-details-marker { display: none; }
     .card-head h3 {
-      margin: 0; font-size: 1.35rem; font-weight: 700;
-      color: var(--text);
+      margin: 0; font-size: 1.3rem; font-weight: 700;
+      color: var(--text); letter-spacing: -0.01em;
     }
-    .card-head .tagline { margin: 0.4rem 0 0; color: var(--muted); font-size: 0.98rem; }
+    .card-head .tagline {
+      margin: 0.4rem 0 0; color: var(--muted); font-size: 0.95rem;
+    }
     .card-badge {
-      flex-shrink: 0; font-size: 0.7rem; font-weight: 600;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--accent); border: 1px solid rgba(0,229,255,0.3);
-      padding: 0.35rem 0.65rem; border-radius: 6px;
+      flex-shrink: 0; font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid rgba(0,229,255,0.35);
+      padding: 0.38rem 0.7rem; border-radius: 7px;
       background: var(--accent-dim);
     }
+    .expand-hint {
+      display: none;
+    }
     .card-body {
-      padding: 0 1.6rem 1.6rem;
+      padding: 0 1.55rem 1.55rem;
       border-top: 1px solid var(--border);
-      display: grid; grid-template-columns: 1fr minmax(180px, 240px); gap: 1.75rem;
+      display: grid; grid-template-columns: 1fr minmax(160px, 220px); gap: 1.75rem;
       padding-top: 1.35rem;
     }
     .card-body h4 {
-      margin: 0 0 0.5rem; font-size: 0.8rem; letter-spacing: 0.08em;
+      margin: 0 0 0.5rem; font-size: 0.75rem; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--muted); font-weight: 600;
     }
-    .card-body p { margin: 0; color: var(--text); opacity: 0.92; }
+    .card-body p {
+      margin: 0; color: var(--text); opacity: 0.92; font-size: 0.98rem;
+    }
     .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
     .tag {
-      font-size: 0.7rem; font-family: "Fira Code", monospace;
-      padding: 0.25rem 0.55rem; border-radius: 4px;
+      font-size: 0.68rem; font-family: "Fira Code", monospace;
+      padding: 0.28rem 0.55rem; border-radius: 5px;
       border: 1px solid var(--border); color: var(--accent);
-      background: rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.3);
     }
     .btn {
-      display: inline-block; margin-top: 1.25rem;
-      padding: 0.7rem 1.15rem; border-radius: 8px;
+      display: inline-block; margin-top: 1.2rem;
+      padding: 0.72rem 1.2rem; border-radius: 9px;
       border: 1px solid var(--accent); color: var(--accent);
       text-decoration: none; font-family: "Fira Code", monospace;
-      font-size: 0.78rem; font-weight: 500; transition: 0.15s;
+      font-size: 0.76rem; font-weight: 500; transition: 0.18s;
+      box-shadow: 0 0 0 rgba(0, 229, 255, 0);
     }
-    .btn:hover { background: var(--accent); color: var(--bg); }
+    .btn:hover {
+      background: var(--accent); color: var(--bg);
+      box-shadow: 0 0 28px var(--accent-glow);
+    }
 
     .trust {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
       margin-top: 0.5rem;
     }
     .trust-item {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.25rem 1.35rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.4rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .trust-item h3 { margin: 0 0 0.4rem; font-size: 0.95rem; }
+    .trust-item:hover {
+      border-color: rgba(0, 229, 255, 0.3);
+      box-shadow: 0 0 30px rgba(0, 229, 255, 0.06);
+    }
+    .trust-item h3 { margin: 0 0 0.45rem; font-size: 0.98rem; }
     .trust-item p { margin: 0; font-size: 0.88rem; color: var(--muted); }
 
     .about-grid {
-      display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; align-items: start;
+      display: grid; grid-template-columns: 1.45fr 1fr; gap: 2rem; align-items: start;
     }
     .about-box {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.55rem;
+      position: relative;
+      overflow: hidden;
     }
-    .about-box p { margin: 0 0 0.85rem; color: var(--muted); }
+    .about-box::before {
+      content: "";
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--violet), transparent);
+    }
+    .about-box p { margin: 0 0 0.9rem; color: var(--muted); }
     .about-box p:last-child { margin-bottom: 0; }
 
     footer {
@@ -188,7 +263,8 @@
 
     @media (max-width: 800px) {
       .card-body, .about-grid, .trust { grid-template-columns: 1fr; }
-      header.hero { padding: 3rem 0 2.5rem; }
+      header.hero { padding: 3.25rem 0 2.75rem; }
+      h1 { font-size: clamp(2.2rem, 10vw, 3rem); }
     }
   </style>
 </head>
@@ -211,17 +287,15 @@
       <div class="status mono">Independent builder · Brisbane / SEQ, Australia</div>
       <h1>Murray Webster</h1>
       <p class="hero-lead">
-        Engineer and researcher at the intersection of
-        <strong>local / multi-agent AI</strong>,
-        <strong>systems reliability</strong>, and
-        <strong>physics-inspired modelling</strong>.
-        I build things that run on hardware I control — then package them so others can too.
+        I build tools that run on <strong>your own machines</strong> — private AI assistants,
+        offline decision systems, phone security checks, and independent physics research.
+        No cloud lock-in. Honest about what works and what is still experimental.
       </p>
       <div class="hero-meta">
-        <span class="chip accent">Local-first AI</span>
-        <span class="chip">Multi-agent systems</span>
-        <span class="chip">Edge / offline</span>
-        <span class="chip">Open tooling</span>
+        <span class="chip accent">Private AI</span>
+        <span class="chip">Works offline</span>
+        <span class="chip">Open tools</span>
+        <span class="chip">Australia</span>
       </div>
     </header>
 
@@ -229,7 +303,8 @@
       <p class="section-label mono">// selected work</p>
       <h2 class="section-title">Projects</h2>
       <p class="section-intro">
-        Living research and software — not vapour. Each dossier is written honestly about maturity and limits.
+        Four live projects. Click any card for a short plain-English overview,
+        then open the full dossier for deeper technical detail.
       </p>
 
       <div class="projects">
@@ -238,27 +313,29 @@
           <summary>
             <div class="card-head">
               <h3>Sovereign Edge-Link (SEL)</h3>
-              <p class="tagline">Multi-agent architecture for offline / edge decision support</p>
+              <p class="tagline">AI that keeps working when the internet is gone</p>
             </div>
             <span class="card-badge mono">Architecture</span>
           </summary>
           <div class="card-body">
             <div>
-              <h4>Overview</h4>
+              <h4>In plain English</h4>
               <p>
-                SEL is a research architecture for specialised agents (Executor, Strategist, Critic, Synthesizer)
-                sharing state on the edge — aimed at denied or low-connectivity environments. Work focuses on
-                role separation, inhibition/gating, and practical loops on local models — not marketing “absolute autonomy.”
+                SEL is a research design for artificial intelligence that does not depend on the cloud.
+                Instead of one big model doing everything, it uses a small team of specialist roles
+                — one plans, one acts, one checks safety, one pulls the answer together —
+                so decisions stay controlled even in places with weak or no signal.
+                Built for tough, offline environments. Still research-stage; human control stays central.
               </p>
-              <a class="btn" href="projects/SEL.html">Read architecture dossier →</a>
+              <a class="btn" href="projects/SEL.html">Full technical dossier →</a>
             </div>
             <div>
-              <h4>Stack</h4>
+              <h4>Focus</h4>
               <div class="tags">
-                <span class="tag">Multi-agent</span>
-                <span class="tag">Ollama</span>
-                <span class="tag">Edge / NPU</span>
-                <span class="tag">Safety gates</span>
+                <span class="tag">Offline AI</span>
+                <span class="tag">Safety checks</span>
+                <span class="tag">Edge systems</span>
+                <span class="tag">Research</span>
               </div>
             </div>
           </div>
@@ -268,31 +345,28 @@
           <summary>
             <div class="card-head">
               <h3>Vespera</h3>
-              <p class="tagline">Multi-OS local AI operator stack</p>
+              <p class="tagline">Your own private AI assistant — on your computer</p>
             </div>
             <span class="card-badge mono">Software</span>
           </summary>
           <div class="card-body">
             <div>
-              <h4>Overview</h4>
+              <h4>In plain English</h4>
               <p>
-                Vespera is a local-first AI operator layer around Ollama: hardware-aware guidance,
-                markdown personas, multi-agent pipelines, Gradio and terminal UIs, and optional tool
-                backends for image/video generation, voice, web search, and network diagnostics.
-                Linux, macOS, and Windows. Open source under MIT.
+                Vespera lets you run a capable AI assistant on a laptop or desktop you control.
+                Chat, switch “personalities,” use optional tools for images, voice, or search,
+                and keep everything local if you want. Works on Linux, Mac, and Windows.
+                Free and open source — not a subscription cloud chatbot.
               </p>
-              <a class="btn" href="projects/vespera.html">Open Vespera dossier →</a>
+              <a class="btn" href="projects/vespera.html">Full technical dossier →</a>
             </div>
             <div>
-              <h4>Stack</h4>
+              <h4>Focus</h4>
               <div class="tags">
-                <span class="tag">Ollama</span>
-                <span class="tag">Python</span>
-                <span class="tag">Gradio</span>
+                <span class="tag">Local AI</span>
+                <span class="tag">Chat</span>
                 <span class="tag">Tools</span>
-                <span class="tag">Linux</span>
-                <span class="tag">macOS</span>
-                <span class="tag">Windows</span>
+                <span class="tag">Linux / Mac / Windows</span>
               </div>
             </div>
           </div>
@@ -302,28 +376,28 @@
           <summary>
             <div class="card-head">
               <h3>Ghostprint</h3>
-              <p class="tagline">Check if your iPhone has been hacked — private, offline, simple</p>
+              <p class="tagline">Check if your iPhone has been hacked or tracked</p>
             </div>
             <span class="card-badge mono">Security</span>
           </summary>
           <div class="card-body">
             <div>
-              <h4>Overview</h4>
+              <h4>In plain English</h4>
               <p>
-                Ghostprint is a private tool that scans an iPhone over USB for signs of spyware and tracking.
-                It runs entirely on your own computer, never sends data to the cloud, and produces a plain-language report.
-                Built for people who want a serious check without commercial “phone cleaner” apps.
+                Ghostprint is a private tool that looks for signs someone may be secretly watching
+                your iPhone — spyware, odd remote-control settings, or suspicious apps.
+                You plug the phone into your own computer over USB. Nothing is sent to the cloud.
+                You get a clear report in everyday language. Built for ordinary people and high-risk users alike.
               </p>
-              <a class="btn" href="projects/ghostprint.html">Open Ghostprint dossier →</a>
+              <a class="btn" href="projects/ghostprint.html">Full technical dossier →</a>
             </div>
             <div>
-              <h4>Stack</h4>
+              <h4>Focus</h4>
               <div class="tags">
-                <span class="tag">iOS</span>
-                <span class="tag">USB</span>
-                <span class="tag">MVT</span>
+                <span class="tag">iPhone</span>
+                <span class="tag">Spyware check</span>
                 <span class="tag">Offline</span>
-                <span class="tag">Linux</span>
+                <span class="tag">Privacy</span>
               </div>
             </div>
           </div>
@@ -333,36 +407,28 @@
           <summary>
             <div class="card-head">
               <h3>ESFT</h3>
-              <p class="tagline">Emergent Spacetime Flux Theory — physics research notes</p>
+              <p class="tagline">A different idea about how the universe expands</p>
             </div>
             <span class="card-badge mono">Research</span>
           </summary>
           <div class="card-body">
             <div>
-              <h4>Overview</h4>
+              <h4>In plain English</h4>
               <p>
-                Independent theoretical work exploring expansion and structure formation through a flux-based
-                spacetime model, with numerical checks (e.g. Bayesian MCMC) against public datasets such as SPARC.
-                Early-stage research — claims stay provisional until published validation.
+                ESFT (Emergent Spacetime Flux Theory) is independent physics research.
+                It explores whether cosmic expansion and structure can be explained with a
+                “flux” model of spacetime, instead of leaning only on unseen dark components.
+                Early-stage work, tested against public datasets. Claims stay provisional until stronger validation.
               </p>
-              
-              <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.25rem;">
-                <a class="btn" style="margin-top: 0;" href="projects/esft.html">Open research dossier →</a>
-              </div>
-
-              <div style="margin-top: 1.5rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; height: 350px; position: relative; background: #05080f;">
-                <iframe src="esft-sim.html" style="width: 100%; height: 100%; border: none;" title="ESFT Topology Simulator"></iframe>
-              </div>
+              <a class="btn" href="projects/esft.html">Full technical dossier →</a>
             </div>
-            
             <div>
-              <h4>Stack</h4>
+              <h4>Focus</h4>
               <div class="tags">
-                <span class="tag">Python</span>
-                <span class="tag">MCMC</span>
+                <span class="tag">Physics</span>
                 <span class="tag">Cosmology</span>
-                <span class="tag">LaTeX</span>
-                <span class="tag">Three.js</span>
+                <span class="tag">Data checks</span>
+                <span class="tag">Early research</span>
               </div>
             </div>
           </div>
@@ -376,16 +442,16 @@
       <h2 class="section-title">Trust & approach</h2>
       <div class="trust">
         <div class="trust-item">
-          <h3>Local-first</h3>
-          <p>Prefer models and tools that run on owner hardware. Cloud is optional, not required.</p>
+          <h3>Your hardware first</h3>
+          <p>Prefer tools that run on machines you own. The cloud is optional, not required.</p>
         </div>
         <div class="trust-item">
-          <h3>Honest maturity</h3>
-          <p>Architecture and demos over hype. What’s shipped, what’s experimental, and what’s next — said plainly.</p>
+          <h3>Honest about maturity</h3>
+          <p>What is shipped, what is experimental, and what is next — said plainly, without hype.</p>
         </div>
         <div class="trust-item">
-          <h3>Human in the loop</h3>
-          <p>High-risk actions use explicit allow/deny gates. Operators stay in control of shell, RF, and recon tools.</p>
+          <h3>You stay in control</h3>
+          <p>Risky actions need explicit approval. Operators keep the final say on sensitive tools.</p>
         </div>
       </div>
     </section>
@@ -396,18 +462,17 @@
       <div class="about-grid">
         <div>
           <p style="color: var(--muted); margin: 0 0 1rem;">
-            Based in South East Queensland. Background across systems engineering, hands-on hardware,
-            and independent R&D. Current focus: local multi-agent AI tooling and <strong style="color:var(--text)">Vespera</strong> —
-            turning LLM experiments into something a non-specialist can install and run.
-            Separate research notes (e.g. edge multi-agent architecture) live in their own dossiers.
+            Based in South East Queensland. Background in systems engineering, hands-on hardware,
+            and independent R&amp;D. Current focus: private local AI (Vespera), offline multi-agent ideas (SEL),
+            phone security tooling (Ghostprint), and occasional physics notes (ESFT).
           </p>
           <p style="color: var(--muted); margin: 0;">
-            This site is a living portfolio. Details evolve as the lab does.
+            This site is a living portfolio. Details change as the work does.
           </p>
         </div>
         <div class="about-box mono" style="font-size: 0.82rem;">
           <p><span style="color: var(--accent);">LOCATION</span><br>Brisbane / SEQ · Australia</p>
-          <p><span style="color: var(--accent);">FOCUS</span><br>Local AI · Edge agents · Systems</p>
+          <p><span style="color: var(--accent);">FOCUS</span><br>Local AI · Offline systems · Security</p>
           <p><span style="color: var(--accent);">GITHUB</span><br><a href="https://github.com/vectisops" style="color: var(--text);">github.com/vectisops</a></p>
         </div>
       </div>
@@ -417,7 +482,7 @@
       <div class="mono">
         Murray Webster · Vectis Ops · Updated July 2026<br>
         <a href="https://github.com/vectisops/vectisops.github.io">Source</a>
-        · Independent research & software — not a classified or commercial sales site
+        · Independent research &amp; software — not a classified or commercial sales site
       </div>
     </footer>
   </div>
