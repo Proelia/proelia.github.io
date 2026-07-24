@@ -1,3 +1,10 @@
+```
+  ┌──────────────────┐
+  │ ▓▓ VECTIS  OPS ▓▓ │
+  │   portfolio      │
+  └──────────────────┘
+```
+
 # Vectis Ops — personal portfolio site
 
 **Live site:** [https://vectisops.github.io/](https://vectisops.github.io/)
@@ -34,7 +41,7 @@ Style: dark cyberpunk, modern, readable on phones.
 ## Related GitHub repositories
 
 - [Vespera](https://github.com/vectisops/Vespera) — local AI operator stack  
-- [ios-security-auditor (Ghostprint)](https://github.com/vectisops/ios-security-auditor) — iPhone security checker  
+- [Ghostprint](https://github.com/vectisops/Ghostprint) — iPhone security checker *(rename from `ios-security-auditor` if not done yet)*  
 - [Emergent-Space-Time-Flux-Theory](https://github.com/vectisops/Emergent-Space-Time-Flux-Theory) — ESFT research notes  
 - [GitHub profile @vectisops](https://github.com/vectisops)  
 
