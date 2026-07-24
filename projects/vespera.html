@@ -3,24 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Vespera — multi-OS local AI operator stack by Murray Webster.">
+  <meta name="description" content="Vespera — private local AI assistant stack for Linux, Mac, and Windows by Murray Webster.">
   <title>Vespera · Vectis Ops</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #05080f; --surface: #0d121c; --accent: #00e5ff; --violet: #a78bfa;
-      --text: #e8eef7; --muted: #8b9bb4; --border: #243044; --ok: #34d399;
+      --bg: #03060c; --surface: #0a1019; --accent: #00e5ff; --violet: #a78bfa;
+      --text: #e8eef7; --muted: #8b9bb4; --border: #1e2a3d; --ok: #34d399;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
       background:
-        radial-gradient(800px 400px at 0% 0%, rgba(0,229,255,.08), transparent 50%),
+        radial-gradient(800px 400px at 0% 0%, rgba(0,229,255,.1), transparent 50%),
+        radial-gradient(600px 300px at 100% 10%, rgba(167,139,250,.08), transparent 45%),
         var(--bg);
       line-height: 1.65;
     }
     .mono { font-family: "Fira Code", monospace; }
-    .wrap { max-width: 820px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
     a { color: var(--accent); }
     nav { padding: 1.25rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
     nav a { text-decoration: none; color: var(--muted); font-size: 0.9rem; }
@@ -31,7 +32,7 @@
       border-radius: 999px; background: rgba(0,229,255,.08); margin-bottom: 1rem;
     }
     h1 { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.75rem; }
-    .lead { font-size: 1.1rem; color: var(--muted); margin: 0 0 2rem; }
+    .lead { font-size: 1.12rem; color: var(--muted); margin: 0 0 1.75rem; }
     h2 { font-size: 1.15rem; margin: 2.25rem 0 0.75rem; color: var(--accent); }
     h3 { font-size: 0.95rem; margin: 1.35rem 0 0.5rem; color: var(--text); font-weight: 600; }
     p, li { color: var(--muted); }
@@ -44,8 +45,8 @@
     .item strong { display: block; color: var(--text); margin-bottom: 0.25rem; font-size: 0.95rem; }
     .item span { font-size: 0.85rem; color: var(--muted); }
     .callout {
-      border-left: 3px solid var(--accent); padding: 0.85rem 1rem; margin: 1.5rem 0;
-      background: rgba(0,229,255,.05); border-radius: 0 8px 8px 0;
+      border-left: 3px solid var(--accent); padding: 0.9rem 1.1rem; margin: 1.5rem 0;
+      background: rgba(0,229,255,.05); border-radius: 0 10px 10px 0;
     }
     .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 0; }
     .tag {
@@ -76,18 +77,22 @@
     <div class="badge mono">Software · Local AI</div>
     <h1>Vespera</h1>
     <p class="lead">
-      A <strong style="color:var(--text)">multi-OS local AI operator stack</strong> —
-      models via Ollama, markdown personas, multi-agent orchestration,
-      Control Center (Gradio) and a pure-terminal TUI, plus optional tool backends.
-      Built to run on hardware you control — not a locked cloud chat box.
+      Your own <strong style="color:var(--text)">private AI assistant</strong> that runs on a computer you control —
+      not a locked cloud chat box. Chat, switch personalities, optional tools for images, voice, and search.
+      Linux, Mac, and Windows. Free and open source.
     </p>
+
+    <div class="callout">
+      <strong style="color:var(--text)">In one sentence:</strong>
+      Vespera is a local-first operator stack around Ollama: hardware-aware setup, markdown personas,
+      multi-agent pipelines, Gradio and terminal UIs, plus optional tool backends that fail soft when offline.
+    </div>
 
     <div class="callout">
       <strong style="color:var(--text)">Status:</strong>
       Active. Multi-OS Python stack is the primary line of development.
       Legacy Windows PowerShell / WPF beta remains for reference.
-      Tool packs degrade gracefully when optional backends are offline.
-      Personality is optional. Android remote client is in active production.
+      Android remote client is in active lab use.
     </div>
 
     <h2>Purpose</h2>
@@ -177,10 +182,6 @@
       (debug APK from Android Studio / <span class="mono">./gradlew assembleDebug</span>).
       Prefer trusted Wi‑Fi or a private overlay (e.g. Tailscale); do not expose Ollama or persona ports on public networks.
     </div>
-    <p>
-      Host side: keep Ollama reachable on the LAN only when you need the phone client, and run any persona
-      sidecar bound appropriately. Phone side: point Settings at the host LAN IP, then chat as usual.
-    </p>
 
     <h2>Quick start</h2>
     <p>Requires a local <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a> install on every platform. Tool backends are optional — see <span class="mono">multi_os/docs/TOOLS.md</span>.</p>
@@ -228,10 +229,6 @@ pip install -r requirements.txt
 python -m vespera scan
 python -m vespera ui
 # Browser → http://127.0.0.1:7860</pre>
-    <p>
-      Native Python path is current. The older PowerShell / WPF Control Center and
-      <span class="mono">VesperaV1-Beta.rar</span> remain in the repo as legacy reference only.
-    </p>
 
     <h3 class="mono">Useful CLI</h3>
     <pre>python -m vespera status
