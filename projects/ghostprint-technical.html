@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ghostprint technical deep dive — libimobiledevice, MVT, CLI, isolation.">
+  <title>Ghostprint Technical · Vectis Ops</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #03060c; --surface: #0a1019; --accent: #00e5ff; --pink: #f472b6;
+      --text: #e8eef7; --muted: #8b9bb4; --border: #1e2a3d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
+      background: radial-gradient(800px 400px at 0% 0%, rgba(0,229,255,.1), transparent 50%), var(--bg);
+      line-height: 1.65;
+    }
+    .mono { font-family: "Fira Code", monospace; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    a { color: var(--accent); }
+    nav { padding: 1.25rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    nav a { text-decoration: none; color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--accent); }
+    .badge { display: inline-block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); border: 1px solid rgba(244,114,182,.4); padding: 0.3rem 0.7rem; border-radius: 999px; background: rgba(244,114,182,.08); margin-bottom: 1rem; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.5rem); font-weight: 800; margin: 0 0 0.75rem; }
+    .lead { font-size: 1.05rem; color: var(--muted); margin: 0 0 1.75rem; }
+    h2 { font-size: 1.1rem; margin: 2.25rem 0 0.75rem; color: var(--accent); }
+    h3 { font-size: 0.95rem; margin: 1.25rem 0 0.45rem; color: var(--text); }
+    p, li { color: var(--muted); }
+    ul { padding-left: 1.2rem; }
+    .callout { border-left: 3px solid var(--pink); padding: 0.9rem 1.1rem; margin: 1.5rem 0; background: rgba(244,114,182,.06); border-radius: 0 10px 10px 0; }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem; overflow-x: auto; font-size: 0.78rem; color: var(--text); font-family: "Fira Code", monospace; line-height: 1.5; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1rem 0; }
+    th, td { border: 1px solid var(--border); padding: 0.55rem 0.7rem; text-align: left; }
+    th { color: var(--text); background: var(--surface); }
+    td { color: var(--muted); }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
+    .tag { font-size: 0.68rem; font-family: "Fira Code", monospace; padding: 0.25rem 0.55rem; border: 1px solid var(--border); border-radius: 4px; color: var(--accent); }
+    footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="mono">
+      <a href="ghostprint.html">← Plain-language dossier</a>
+      <a href="../">Portfolio</a>
+    </nav>
+
+    <div class="badge mono">Technical deep dive</div>
+    <h1>Ghostprint — implementation detail</h1>
+    <p class="lead">USB iOS audit CLI: libimobiledevice backups, MVT IOC scanning, profile/app heuristics, Markdown/JSON reports.</p>
+
+    <div class="callout">
+      <strong style="color:var(--text)">Scope:</strong> Operators and developers. Everyday guide: <a href="ghostprint.html">plain dossier</a>.
+    </div>
+
+    <h2>Architecture</h2>
+    <ul>
+      <li><strong style="color:var(--text)">libimobiledevice</strong> — pairing, device info, <span class="mono">idevicebackup2</span> backups</li>
+      <li><strong style="color:var(--text)">MVT</strong> — Amnesty Mobile Verification Toolkit IOC matching on backup artefacts</li>
+      <li><strong style="color:var(--text)">Profile / app modules</strong> — configuration profile extraction and name-based heuristics</li>
+      <li><strong style="color:var(--text)">Reporting</strong> — human Markdown + machine JSON</li>
+    </ul>
+
+    <h2>Host setup (Ubuntu/Debian)</h2>
+    <pre>sudo apt update
+sudo apt install -y libimobiledevice-utils usbmuxd python3-pip python3-venv git
+
+git clone https://github.com/vectisops/ios-security-auditor.git
+cd ios-security-auditor
+git checkout feature/initial-auditor
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+pip install mvt</pre>
+
+    <h2>CLI</h2>
+    <pre>python auditor.py scan --output reports/
+python auditor.py info
+python auditor.py apps
+python auditor.py profiles</pre>
+
+    <h2>Operational notes</h2>
+    <ul>
+      <li>Device must be unlocked and trusted</li>
+      <li>Full backup duration scales with data volume (often 30–90+ minutes)</li>
+      <li>Prefer isolated host (dedicated user, VM, or container)</li>
+      <li>No telemetry path in the tool; offline after dependency install</li>
+      <li>Works best on non-jailbroken devices; novel spyware without public IOCs may evade detection</li>
+    </ul>
+
+    <h2>Legal</h2>
+    <p>Consensual examination only. Authorised device owner / explicit permission required.</p>
+
+    <p><a href="https://github.com/vectisops/ios-security-auditor" target="_blank" rel="noopener">github.com/vectisops/ios-security-auditor</a> · <span class="mono">feature/initial-auditor</span></p>
+
+    <div class="tags">
+      <span class="tag">libimobiledevice</span><span class="tag">MVT</span><span class="tag">Python</span><span class="tag">iOS forensics</span>
+    </div>
+
+    <footer class="mono">
+      Murray Webster · Vectis Ops · July 2026<br>
+      <a href="ghostprint.html">Plain dossier</a> · <a href="../">Portfolio</a>
+    </footer>
+  </div>
+</body>
+</html>

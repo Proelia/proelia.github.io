@@ -3,248 +3,137 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Ghostprint — check if your iPhone has been hacked or secretly tracked. Private, offline, simple.">
+  <meta name="description" content="Ghostprint plain-language dossier — check if your iPhone has been hacked or tracked.">
   <title>Ghostprint · Vectis Ops</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #03060c; --surface: #0a1019; --accent: #00e5ff; --violet: #a78bfa;
-      --text: #e8eef7; --muted: #8b9bb4; --border: #1e2a3d; --ok: #34d399;
+      --bg: #03060c; --surface: #0a1019; --accent: #00e5ff; --text: #e8eef7; --muted: #8b9bb4; --border: #1e2a3d;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
-      background:
-        radial-gradient(800px 400px at 0% 0%, rgba(0,229,255,.1), transparent 50%),
-        radial-gradient(600px 300px at 100% 10%, rgba(167,139,250,.08), transparent 45%),
-        var(--bg);
-      line-height: 1.65;
+      background: radial-gradient(800px 400px at 0% 0%, rgba(0,229,255,.1), transparent 50%), radial-gradient(600px 300px at 100% 10%, rgba(167,139,250,.08), transparent 45%), var(--bg);
+      line-height: 1.7;
     }
     .mono { font-family: "Fira Code", monospace; }
-    .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 4rem; }
     a { color: var(--accent); }
-    nav { padding: 1.25rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
+    nav { padding: 1.25rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
     nav a { text-decoration: none; color: var(--muted); font-size: 0.9rem; }
     nav a:hover { color: var(--accent); }
-    .badge {
-      display: inline-block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); border: 1px solid rgba(0,229,255,.35); padding: 0.3rem 0.7rem;
-      border-radius: 999px; background: rgba(0,229,255,.08); margin-bottom: 1rem;
-    }
-    h1 { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.75rem; }
-    .lead { font-size: 1.12rem; color: var(--muted); margin: 0 0 1.75rem; }
-    h2 { font-size: 1.15rem; margin: 2.25rem 0 0.75rem; color: var(--accent); }
-    h3 { font-size: 0.95rem; margin: 1.35rem 0 0.5rem; color: var(--text); font-weight: 600; }
+    .badge { display: inline-block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(0,229,255,.35); padding: 0.3rem 0.7rem; border-radius: 999px; background: rgba(0,229,255,.08); margin-bottom: 1rem; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); font-weight: 800; margin: 0 0 0.75rem; }
+    .lead { font-size: 1.15rem; color: var(--muted); margin: 0 0 1.75rem; }
+    h2 { font-size: 1.2rem; margin: 2.4rem 0 0.85rem; color: var(--text); font-weight: 700; }
+    h3 { font-size: 1rem; margin: 1.35rem 0 0.5rem; color: var(--accent); }
     p, li { color: var(--muted); }
-    ul { padding-left: 1.2rem; }
-    li { margin-bottom: 0.45rem; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin: 1rem 0; }
-    .item {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem;
-    }
-    .item strong { display: block; color: var(--text); margin-bottom: 0.25rem; font-size: 0.95rem; }
-    .item span { font-size: 0.85rem; color: var(--muted); }
-    .callout {
-      border-left: 3px solid var(--accent); padding: 0.9rem 1.1rem; margin: 1.5rem 0;
-      background: rgba(0,229,255,.05); border-radius: 0 10px 10px 0;
-    }
-    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 0; }
-    .tag {
-      font-size: 0.7rem; font-family: "Fira Code", monospace; padding: 0.25rem 0.55rem;
-      border: 1px solid var(--border); border-radius: 4px; color: var(--accent);
-    }
-    pre {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-      padding: 1rem 1.1rem; overflow-x: auto; font-size: 0.78rem; color: var(--text);
-      font-family: "Fira Code", monospace; line-height: 1.5;
-    }
-    table {
-      width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1rem 0;
-    }
-    th, td {
-      border: 1px solid var(--border); padding: 0.55rem 0.7rem; text-align: left;
-    }
-    th { color: var(--text); background: var(--surface); font-weight: 600; }
-    td { color: var(--muted); }
+    ul, ol { padding-left: 1.25rem; }
+    li { margin-bottom: 0.55rem; }
+    .callout { border-left: 3px solid var(--accent); padding: 1rem 1.15rem; margin: 1.5rem 0; background: rgba(0,229,255,.05); border-radius: 0 10px 10px 0; }
+    .step { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.2rem; margin: 0.75rem 0; }
+    .step h3 { margin: 0 0 0.35rem; }
+    .step p { margin: 0; font-size: 0.95rem; }
+    .btn { display: inline-block; margin-top: 0.5rem; padding: 0.7rem 1.15rem; border-radius: 9px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-family: "Fira Code", monospace; font-size: 0.76rem; }
+    .btn:hover { background: var(--accent); color: var(--bg); }
     footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); }
-    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <nav class="mono"><a href="../">← Vectis Ops</a></nav>
+    <nav class="mono">
+      <a href="../">← Portfolio</a>
+      <a href="ghostprint-technical.html">Technical deep dive →</a>
+    </nav>
 
-    <div class="badge mono">Security · Offline</div>
+    <div class="badge mono">Full dossier · Plain language</div>
     <h1>Ghostprint</h1>
     <p class="lead">
-      Check if your iPhone has been <strong style="color:var(--text)">hacked or secretly tracked</strong> —
-      private, offline, and simple. Runs on your own computer. Never sends your data anywhere.
+      Check whether your iPhone shows signs of being <strong style="color:var(--text)">hacked or secretly tracked</strong>.
+      Private. Offline. Built so non-technical people can understand the report.
     </p>
 
     <div class="callout">
-      <strong style="color:var(--text)">Status:</strong>
-      Early public release. Core USB scan, backup analysis, and spyware fingerprint checks work.
-      Written so non-technical people can follow along. Open source under MIT.
+      <strong style="color:var(--text)">The simple idea:</strong>
+      Spyware sometimes leaves digital fingerprints. Ghostprint plugs your phone into your own computer,
+      makes a careful copy of its data, and looks for those fingerprints — plus odd remote-control settings
+      and suspicious apps. Nothing is uploaded to a company cloud.
     </div>
 
-    <h2>What Ghostprint does</h2>
-    <p>
-      If you worry someone has been watching your phone — reading messages, listening through the microphone,
-      tracking location, or installing hidden software — Ghostprint looks for the digital “fingerprints”
-      that kind of spyware often leaves behind.
-    </p>
-
-    <div class="grid">
-      <div class="item"><strong>Connects by USB</strong><span>Same idea as plugging in for a normal backup</span></div>
-      <div class="item"><strong>Makes a careful copy</strong><span>Then examines that copy — not your live phone</span></div>
-      <div class="item"><strong>Looks for spyware traces</strong><span>Uses Amnesty’s MVT engine for known fingerprints</span></div>
-      <div class="item"><strong>Checks settings & apps</strong><span>Flags unknown profiles and suspicious apps</span></div>
+    <h2>What it does, step by step</h2>
+    <div class="step">
+      <h3>1. Connects by USB cable</h3>
+      <p>Same idea as plugging in for a normal computer backup. You unlock the phone and tap Trust.</p>
+    </div>
+    <div class="step">
+      <h3>2. Makes a careful copy</h3>
+      <p>It examines that copy, not your live phone while you are using it.</p>
+    </div>
+    <div class="step">
+      <h3>3. Looks for known spyware traces</h3>
+      <p>Uses a respected free engine (originally from Amnesty International’s work) that knows many commercial spyware fingerprints.</p>
+    </div>
+    <div class="step">
+      <h3>4. Checks settings and apps</h3>
+      <p>Flags unknown “management” profiles and apps with suspicious names.</p>
+    </div>
+    <div class="step">
+      <h3>5. Writes a plain report</h3>
+      <p>You get a readable summary and practical next steps.</p>
     </div>
 
-    <p>At the end you get a clear report in plain language.</p>
-
-    <h2>Who it’s for</h2>
+    <h2>Who it is for</h2>
     <ul>
       <li>Anyone worried their phone may have been compromised</li>
-      <li>Journalists, activists, or people in higher-risk situations</li>
-      <li>People who want a private check without commercial “phone cleaner” apps</li>
-      <li>Technical users who need a starting point for deeper investigation</li>
+      <li>Journalists, activists, or higher-risk users</li>
+      <li>People who refuse commercial “phone cleaner” apps that demand cloud accounts</li>
+    </ul>
+
+    <h2>What it can and cannot do</h2>
+    <h3>Can help find</h3>
+    <ul>
+      <li>Known commercial spyware families (including some related to high-end tools like Pegasus)</li>
+      <li>Unexpected remote-management profiles</li>
+      <li>Roughly suspicious app names</li>
+    </ul>
+    <h3>Cannot</h3>
+    <ul>
+      <li>Guarantee the phone is perfectly clean</li>
+      <li>Watch the phone in real time</li>
+      <li>Automatically “fix” infection</li>
+      <li>Work if the phone stays locked</li>
     </ul>
 
     <div class="callout">
-      <strong style="color:var(--text)">Important:</strong>
-      This is not a magic virus scanner. It is a serious forensic-style check focused on known spyware
-      and suspicious configurations. Brand-new spyware with no public fingerprints is hard to detect.
+      <strong style="color:var(--text)">If something looks serious:</strong>
+      Save the report. Remove unknown profiles on the phone. Change your Apple ID password from another device.
+      Consider a full erase and set-up as new — without restoring from a suspect backup.
+      High-risk users should contact a digital security specialist.
     </div>
 
-    <h2>What it can and cannot do</h2>
-    <h3>It can help detect</h3>
+    <h2>Safety basics</h2>
     <ul>
-      <li>Known commercial spyware (including some Pegasus-related families)</li>
-      <li>Unknown or unexpected configuration profiles that can control the phone</li>
-      <li>Apps that look suspicious based on their names</li>
-      <li>Basic signs that something unusual has been installed</li>
-    </ul>
-
-    <h3>It cannot</h3>
-    <ul>
-      <li>Guarantee the phone is 100% clean</li>
-      <li>Watch the phone in real time while you use it</li>
-      <li>Fix problems automatically — it investigates and reports</li>
-      <li>Work if the phone stays locked or you refuse to trust the computer</li>
+      <li>Only check phones you own or have clear permission to examine</li>
+      <li>Prefer a clean computer you do not use for banking</li>
+      <li>Leave the phone charged — backups can take a long time</li>
+      <li>Keep iOS updated</li>
     </ul>
 
     <p>
-      If Ghostprint finds something serious, the safest step is usually to erase the phone and set it up as new
-      (without restoring from a possibly tainted backup).
-    </p>
-
-    <h2>Safety notes before you start</h2>
-    <ul>
-      <li><strong style="color:var(--text)">Only check phones you own</strong> or have clear permission to examine.</li>
-      <li><strong style="color:var(--text)">Use a clean computer if possible</strong> — ideally Linux, not the one you bank on.</li>
-      <li><strong style="color:var(--text)">Unlock the iPhone and tap Trust</strong> when asked.</li>
-      <li><strong style="color:var(--text)">Backups can take 30–90 minutes</strong> — leave the phone plugged in and charged.</li>
-      <li><strong style="color:var(--text)">Keep iOS updated</strong> — many attacks are fixed by software updates alone.</li>
-    </ul>
-
-    <h2>What you need</h2>
-    <p>A Linux computer works best (Ubuntu, Debian, Fedora, etc.). macOS can work too.</p>
-
-    <h3 class="mono">Install system tools (Ubuntu / Debian)</h3>
-    <pre>sudo apt update
-sudo apt install -y libimobiledevice-utils usbmuxd python3-pip python3-venv git</pre>
-
-    <h3 class="mono">Set up Ghostprint</h3>
-    <pre>git clone https://github.com/vectisops/ios-security-auditor.git
-cd ios-security-auditor
-git checkout feature/initial-auditor
-
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-pip install mvt</pre>
-
-    <h2>How to run a full check</h2>
-    <ol style="color: var(--muted); padding-left: 1.2rem;">
-      <li>Unlock your iPhone and connect it with a USB cable.</li>
-      <li>When the phone asks “Trust This Computer?”, tap <strong style="color:var(--text)">Trust</strong>.</li>
-      <li>On the computer, enter the tool folder and activate the virtual environment (you should see <span class="mono">(.venv)</span>).</li>
-      <li>Run:</li>
-    </ol>
-    <pre>python auditor.py scan --output reports/</pre>
-    <p>
-      Ghostprint will collect device info, create a backup, scan for spyware fingerprints,
-      check profiles and apps, then write a report into the <span class="mono">reports/</span> folder.
-    </p>
-
-    <h2>Other simple commands</h2>
-    <table>
-      <thead>
-        <tr><th>Command</th><th>What it does</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="mono">python auditor.py info</td><td>Shows phone name, iOS version, serial, etc.</td></tr>
-        <tr><td class="mono">python auditor.py apps</td><td>Lists apps and flags suspicious names</td></tr>
-        <tr><td class="mono">python auditor.py profiles</td><td>Looks for configuration profiles in backups</td></tr>
-      </tbody>
-    </table>
-
-    <h2>Understanding the report</h2>
-    <ul>
-      <li><strong style="color:var(--text)">MVT / Spyware results</strong> — if it says “IOCs detected: YES”, treat it seriously.</li>
-      <li><strong style="color:var(--text)">Configuration profiles</strong> — anything you don’t recognise (especially MDM, Management, Remote, VPN) should be checked under Settings → General → VPN & Device Management.</li>
-      <li><strong style="color:var(--text)">Suspicious apps</strong> — rough warnings based on names only.</li>
-      <li><strong style="color:var(--text)">Recommendations</strong> — practical next steps at the end of every report.</li>
-    </ul>
-
-    <h2>If something looks wrong</h2>
-    <ol style="color: var(--muted); padding-left: 1.2rem;">
-      <li>Don’t panic — many findings turn out to be nothing.</li>
-      <li>Save the report.</li>
-      <li>Remove unknown profiles on the phone.</li>
-      <li>Change your Apple ID password from a different trusted device.</li>
-      <li>Review devices signed into your Apple ID.</li>
-      <li>Consider a full erase and set-up as new (do not restore from a suspect backup).</li>
-      <li>High-risk users should contact a digital security specialist.</li>
-    </ol>
-
-    <h2>Technical under the hood</h2>
-    <p>
-      Ghostprint orchestrates <span class="mono">libimobiledevice</span> (USB pairing, device info, backups via idevicebackup2)
-      and Amnesty International’s <strong style="color:var(--text)">Mobile Verification Toolkit (MVT)</strong> for IOC matching
-      against known spyware families. Profile and app modules add heuristic checks on configuration profiles
-      and package names. Reports are emitted as Markdown and JSON. Designed for isolated Linux (or macOS) hosts;
-      no telemetry, no cloud upload path in the tool itself.
-    </p>
-
-    <h2>Privacy</h2>
-    <p>
-      Ghostprint never phones home. After software is installed it does not need the internet.
-      Prefer a dedicated user account or disposable virtual machine. Delete the backup folder when finished
-      if you want to clear sensitive copies from the computer.
-    </p>
-
-    <h2>Links</h2>
-    <p>
+      Project home:
       <a href="https://github.com/vectisops/ios-security-auditor" target="_blank" rel="noopener">github.com/vectisops/ios-security-auditor</a>
-      · Branch: <span class="mono">feature/initial-auditor</span>
     </p>
 
-    <div class="tags">
-      <span class="tag">iOS</span>
-      <span class="tag">USB</span>
-      <span class="tag">MVT</span>
-      <span class="tag">Spyware</span>
-      <span class="tag">Offline</span>
-      <span class="tag">Linux</span>
-      <span class="tag">MIT</span>
+    <div class="callout">
+      <strong style="color:var(--text)">Want install commands and forensic detail?</strong><br>
+      libimobiledevice, MVT, CLI, and isolation notes are on the technical page.
+      <br><br>
+      <a class="btn" href="ghostprint-technical.html">Open technical deep dive →</a>
     </div>
 
     <footer class="mono">
       Murray Webster · Vectis Ops · July 2026<br>
-      <a href="../">Back to portfolio</a> ·
-      <a href="https://github.com/vectisops">GitHub</a>
+      <a href="../">Back to portfolio</a>
     </footer>
   </div>
 </body>
