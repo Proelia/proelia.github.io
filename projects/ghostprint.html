@@ -8,19 +8,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #05080f; --surface: #0d121c; --accent: #00e5ff; --violet: #a78bfa;
-      --text: #e8eef7; --muted: #8b9bb4; --border: #243044; --ok: #34d399;
+      --bg: #03060c; --surface: #0a1019; --accent: #00e5ff; --violet: #a78bfa;
+      --text: #e8eef7; --muted: #8b9bb4; --border: #1e2a3d; --ok: #34d399;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
       background:
-        radial-gradient(800px 400px at 0% 0%, rgba(0,229,255,.08), transparent 50%),
+        radial-gradient(800px 400px at 0% 0%, rgba(0,229,255,.1), transparent 50%),
+        radial-gradient(600px 300px at 100% 10%, rgba(167,139,250,.08), transparent 45%),
         var(--bg);
       line-height: 1.65;
     }
     .mono { font-family: "Fira Code", monospace; }
-    .wrap { max-width: 820px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
     a { color: var(--accent); }
     nav { padding: 1.25rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; }
     nav a { text-decoration: none; color: var(--muted); font-size: 0.9rem; }
@@ -31,7 +32,7 @@
       border-radius: 999px; background: rgba(0,229,255,.08); margin-bottom: 1rem;
     }
     h1 { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 0.75rem; }
-    .lead { font-size: 1.1rem; color: var(--muted); margin: 0 0 2rem; }
+    .lead { font-size: 1.12rem; color: var(--muted); margin: 0 0 1.75rem; }
     h2 { font-size: 1.15rem; margin: 2.25rem 0 0.75rem; color: var(--accent); }
     h3 { font-size: 0.95rem; margin: 1.35rem 0 0.5rem; color: var(--text); font-weight: 600; }
     p, li { color: var(--muted); }
@@ -44,8 +45,8 @@
     .item strong { display: block; color: var(--text); margin-bottom: 0.25rem; font-size: 0.95rem; }
     .item span { font-size: 0.85rem; color: var(--muted); }
     .callout {
-      border-left: 3px solid var(--accent); padding: 0.85rem 1rem; margin: 1.5rem 0;
-      background: rgba(0,229,255,.05); border-radius: 0 8px 8px 0;
+      border-left: 3px solid var(--accent); padding: 0.9rem 1.1rem; margin: 1.5rem 0;
+      background: rgba(0,229,255,.05); border-radius: 0 10px 10px 0;
     }
     .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1rem 0 0; }
     .tag {
@@ -207,6 +208,15 @@ pip install mvt</pre>
       <li>Consider a full erase and set-up as new (do not restore from a suspect backup).</li>
       <li>High-risk users should contact a digital security specialist.</li>
     </ol>
+
+    <h2>Technical under the hood</h2>
+    <p>
+      Ghostprint orchestrates <span class="mono">libimobiledevice</span> (USB pairing, device info, backups via idevicebackup2)
+      and Amnesty International’s <strong style="color:var(--text)">Mobile Verification Toolkit (MVT)</strong> for IOC matching
+      against known spyware families. Profile and app modules add heuristic checks on configuration profiles
+      and package names. Reports are emitted as Markdown and JSON. Designed for isolated Linux (or macOS) hosts;
+      no telemetry, no cloud upload path in the tool itself.
+    </p>
 
     <h2>Privacy</h2>
     <p>
