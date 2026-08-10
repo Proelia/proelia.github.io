@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Murray Webster — local AI, offline systems, and independent research. Brisbane / QLD, Australia.">
-  <title>Murray Webster · Vectis Ops</title>
+  <meta name="description" content="Vectis Operations — local AI, offline systems, and independent research. Brisbane / QLD, Australia.">
+  <title>Vectis Operations · Local AI & Offline Systems</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -39,16 +39,16 @@
       content: "";
       position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background:
-        radial-gradient(ellipse 80% 50% at 15% -10%, rgba(0, 229, 255, 0.12), transparent 55%),
-        radial-gradient(ellipse 60% 40% at 95% 5%, rgba(167, 139, 250, 0.1), transparent 50%),
-        radial-gradient(ellipse 50% 30% at 50% 100%, rgba(244, 114, 182, 0.05), transparent 50%);
+        radial-gradient(ellipse 80% 50% at 15% -10%, rgba(0, 229, 255, 0.14), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 95% 5%, rgba(167, 139, 250, 0.12), transparent 50%),
+        radial-gradient(ellipse 50% 30% at 50% 100%, rgba(244, 114, 182, 0.06), transparent 50%);
     }
     body::after {
       content: "";
-      position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.03;
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.035;
       background-image:
-        linear-gradient(rgba(0, 229, 255, 0.4) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 229, 255, 0.4) 1px, transparent 1px);
+        linear-gradient(rgba(0, 229, 255, 0.45) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.45) 1px, transparent 1px);
       background-size: 48px 48px;
     }
     .mono { font-family: "Fira Code", ui-monospace, monospace; }
@@ -59,8 +59,8 @@
       padding: 1.15rem 0;
       border-bottom: 1px solid var(--border);
       position: sticky; top: 0; z-index: 30;
-      background: rgba(3, 6, 12, 0.82);
-      backdrop-filter: blur(16px);
+      background: rgba(3, 6, 12, 0.85);
+      backdrop-filter: blur(18px);
     }
     .brand {
       display: flex; align-items: center; gap: 0.75rem;
@@ -71,7 +71,7 @@
       height: 38px;
       border-radius: 11px;
       object-fit: cover;
-      box-shadow: 0 0 24px var(--accent-glow);
+      box-shadow: 0 0 28px var(--accent-glow);
       display: block;
     }
     .nav-links { display: flex; gap: 1.35rem; flex-wrap: wrap; }
@@ -82,7 +82,7 @@
     .nav-links a:hover { color: var(--accent); }
 
     header.hero {
-      padding: 5rem 0 4rem;
+      padding: 5.5rem 0 4.25rem;
       border-bottom: 1px solid var(--border);
       position: relative;
     }
@@ -106,7 +106,7 @@
       font-size: clamp(2.6rem, 8vw, 4rem);
       font-weight: 800; letter-spacing: -0.035em;
       line-height: 1.02; margin: 0 0 1.35rem;
-      background: linear-gradient(120deg, #fff 30%, var(--accent) 90%);
+      background: linear-gradient(120deg, #fff 25%, var(--accent) 85%);
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -114,7 +114,7 @@
       font-size: 1.18rem; color: var(--muted); max-width: 42rem;
       border-left: 3px solid var(--accent);
       padding-left: 1.25rem; margin: 0;
-      box-shadow: -4px 0 20px -8px var(--accent-glow);
+      box-shadow: -4px 0 24px -8px var(--accent-glow);
     }
     .hero-lead strong { color: var(--text); font-weight: 600; }
     .hero-meta {
@@ -125,16 +125,16 @@
       padding: 0.4rem 0.85rem; border-radius: 999px;
       border: 1px solid var(--border); color: var(--muted);
       background: var(--surface);
-      transition: border-color 0.2s, color 0.2s;
+      transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
     }
-    .chip:hover { border-color: rgba(0,229,255,0.4); color: var(--accent); }
+    .chip:hover { border-color: rgba(0,229,255,0.45); color: var(--accent); box-shadow: 0 0 18px rgba(0,229,255,0.12); }
     .chip.accent {
-      border-color: rgba(0,229,255,0.4); color: var(--accent);
+      border-color: rgba(0,229,255,0.45); color: var(--accent);
       background: var(--accent-dim);
-      box-shadow: 0 0 20px rgba(0, 229, 255, 0.12);
+      box-shadow: 0 0 22px rgba(0, 229, 255, 0.15);
     }
 
-    section { padding: 4rem 0; }
+    section { padding: 4.25rem 0; }
     .section-label {
       font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
       color: var(--accent); font-weight: 600; margin: 0 0 0.55rem;
@@ -154,12 +154,13 @@
       transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
     }
     details.card:hover {
-      border-color: rgba(0, 229, 255, 0.3);
-      box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.08), 0 16px 48px rgba(0, 0, 0, 0.4);
+      border-color: rgba(0, 229, 255, 0.35);
+      box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.1), 0 18px 52px rgba(0, 0, 0, 0.45);
+      transform: translateY(-2px);
     }
     details.card[open] {
-      border-color: rgba(0, 229, 255, 0.45);
-      box-shadow: 0 0 40px rgba(0, 229, 255, 0.08), 0 20px 50px rgba(0, 0, 0, 0.45);
+      border-color: rgba(0, 229, 255, 0.5);
+      box-shadow: 0 0 48px rgba(0, 229, 255, 0.1), 0 22px 55px rgba(0, 0, 0, 0.5);
     }
     summary {
       list-style: none; cursor: pointer;
@@ -177,7 +178,7 @@
     .card-badge {
       flex-shrink: 0; font-size: 0.68rem; font-weight: 600;
       letter-spacing: 0.07em; text-transform: uppercase;
-      color: var(--accent); border: 1px solid rgba(0,229,255,0.35);
+      color: var(--accent); border: 1px solid rgba(0,229,255,0.4);
       padding: 0.38rem 0.7rem; border-radius: 7px;
       background: var(--accent-dim);
     }
@@ -210,7 +211,7 @@
     }
     .btn:hover {
       background: var(--accent); color: var(--bg);
-      box-shadow: 0 0 28px var(--accent-glow);
+      box-shadow: 0 0 32px var(--accent-glow);
     }
 
     .trust {
@@ -222,11 +223,12 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 1.35rem 1.4rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
     .trust-item:hover {
-      border-color: rgba(0, 229, 255, 0.3);
-      box-shadow: 0 0 30px rgba(0, 229, 255, 0.06);
+      border-color: rgba(0, 229, 255, 0.35);
+      box-shadow: 0 0 32px rgba(0, 229, 255, 0.08);
+      transform: translateY(-2px);
     }
     .trust-item h3 { margin: 0 0 0.45rem; font-size: 0.98rem; }
     .trust-item p { margin: 0; font-size: 0.88rem; color: var(--muted); }
@@ -260,7 +262,7 @@
 
     @media (max-width: 800px) {
       .card-body, .about-grid, .trust { grid-template-columns: 1fr; }
-      header.hero { padding: 3.25rem 0 2.75rem; }
+      header.hero { padding: 3.5rem 0 3rem; }
       h1 { font-size: clamp(2.2rem, 10vw, 3rem); }
     }
   </style>
@@ -282,10 +284,10 @@
 
     <header class="hero">
       <div class="status mono">Independent builder · Brisbane / SEQ, Australia</div>
-      <h1>Murray Webster</h1>
+      <h1>Vectis Operations</h1>
       <p class="hero-lead">
-        I build tools that run on <strong>your own machines</strong> — private AI assistants,
-        offline decision systems, phone security checks, and independent physics research.
+        Tools that run on <strong>your own machines</strong> — private AI assistants,
+        offline decision systems, phone security checks, job-search automation, and independent physics research.
         No cloud lock-in. Honest about what works and what is still experimental.
       </p>
       <div class="hero-meta">
@@ -300,7 +302,7 @@
       <p class="section-label mono">// selected work</p>
       <h2 class="section-title">Projects</h2>
       <p class="section-intro">
-        Four live projects. Click a card for a short overview, then open the full plain-language dossier.
+        Live projects. Click a card for a short overview, then open the full plain-language dossier.
         Each dossier also links to a separate technical deep dive for engineers.
       </p>
 
@@ -403,6 +405,37 @@
         <details class="card">
           <summary>
             <div class="card-head">
+              <h3>AutoJob</h3>
+              <p class="tagline">Personal job-search assistant for Australia (SEQ / Brisbane)</p>
+            </div>
+            <span class="card-badge mono">Automation</span>
+          </summary>
+          <div class="card-body">
+            <div>
+              <h4>In plain English</h4>
+              <p>
+                AutoJob searches more widely than a normal job-board session, ranks results against
+                your preferences and résumé, then shows only the strongest matches (max 30).
+                Local de-duplication keeps later searches fresh. Everything stays on your machine —
+                private, quiet, and focused on roles that actually fit.
+              </p>
+              <a class="btn" href="projects/autojob.html">Open full dossier →</a>
+            </div>
+            <div>
+              <h4>Focus</h4>
+              <div class="tags">
+                <span class="tag">Job search</span>
+                <span class="tag">Australia</span>
+                <span class="tag">Local ranking</span>
+                <span class="tag">Privacy</span>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <div class="card-head">
               <h3>ESFT</h3>
               <p class="tagline">A different idea about how the universe expands</p>
             </div>
@@ -455,13 +488,13 @@
 
     <section id="about">
       <p class="section-label mono">// about</p>
-      <h2 class="section-title">About Murray</h2>
+      <h2 class="section-title">About Vectis Operations</h2>
       <div class="about-grid">
         <div>
           <p style="color: var(--muted); margin: 0 0 1rem;">
             Based in South East Queensland. Background in systems engineering, hands-on hardware,
             and independent R&D. Current focus: private local AI (Vespera), offline multi-agent ideas (SEL),
-            phone security tooling (Ghostprint), and occasional physics notes (ESFT).
+            phone security tooling (Ghostprint), personal job-search automation (AutoJob), and occasional physics notes (ESFT).
           </p>
           <p style="color: var(--muted); margin: 0;">
             This site is a living portfolio. Details change as the work does.
@@ -469,7 +502,7 @@
         </div>
         <div class="about-box mono" style="font-size: 0.82rem;">
           <p><span style="color: var(--accent);">LOCATION</span><br>Brisbane / SEQ · Australia</p>
-          <p><span style="color: var(--accent);">FOCUS</span><br>Local AI · Offline systems · Security</p>
+          <p><span style="color: var(--accent);">FOCUS</span><br>Local AI · Offline systems · Security · Automation</p>
           <p><span style="color: var(--accent);">GITHUB</span><br><a href="https://github.com/vectisops" style="color: var(--text);">github.com/vectisops</a></p>
         </div>
       </div>
@@ -477,7 +510,7 @@
 
     <footer>
       <div class="mono">
-        Murray Webster · Vectis Ops · Updated July 2026<br>
+        Vectis Operations · Updated August 2026<br>
         <a href="https://github.com/vectisops/vectisops.github.io">Source</a>
         · Independent research & software — not a classified or commercial sales site
       </div>
