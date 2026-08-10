@@ -182,6 +182,11 @@
       padding: 0.38rem 0.7rem; border-radius: 7px;
       background: var(--accent-dim);
     }
+    .card-badge.fork {
+      color: var(--violet);
+      border-color: rgba(167,139,250,0.45);
+      background: rgba(167,139,250,0.1);
+    }
     .card-body {
       padding: 0 1.55rem 1.55rem;
       border-top: 1px solid var(--border);
@@ -277,6 +282,7 @@
       </a>
       <div class="nav-links mono">
         <a href="#work">Work</a>
+        <a href="#forks">Forks</a>
         <a href="#about">About</a>
         <a href="https://github.com/vectisops" target="_blank" rel="noopener">GitHub</a>
       </div>
@@ -302,7 +308,7 @@
       <p class="section-label mono">// selected work</p>
       <h2 class="section-title">Projects</h2>
       <p class="section-intro">
-        Live projects. Click a card for a short overview, then open the full plain-language dossier.
+        Live original projects. Click a card for a short overview, then open the full plain-language dossier.
         Each dossier also links to a separate technical deep dive for engineers.
       </p>
 
@@ -467,6 +473,132 @@
       </div>
     </section>
 
+    <section id="forks">
+      <p class="section-label mono">// forks & attributions</p>
+      <h2 class="section-title">Forked projects</h2>
+      <p class="section-intro">
+        These repositories are maintained forks of work created by other people.
+        Original authors are credited on every dossier page. Vectis Ops does not claim authorship of the upstream code.
+      </p>
+
+      <div class="projects">
+
+        <details class="card">
+          <summary>
+            <div class="card-head">
+              <h3>MyPaiOS</h3>
+              <p class="tagline">Local-first AI workspace (fork)</p>
+            </div>
+            <span class="card-badge mono fork">Fork</span>
+          </summary>
+          <div class="card-body">
+            <div>
+              <h4>In plain English</h4>
+              <p>
+                A substantial local-first AI workspace (chat, agents, research, video, email triage).
+                This is a fork of the project by Vishal Pawar, itself built on earlier Odysseus work.
+                Full credit belongs to the original authors.
+              </p>
+              <a class="btn" href="projects/mypaios.html">Open full dossier →</a>
+            </div>
+            <div>
+              <h4>Original</h4>
+              <div class="tags">
+                <span class="tag">Vishal Pawar</span>
+                <span class="tag">Odysseus base</span>
+                <span class="tag">Local AI</span>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <div class="card-head">
+              <h3>World Monitor</h3>
+              <p class="tagline">Real-time global OSINT dashboard (fork)</p>
+            </div>
+            <span class="card-badge mono fork">Fork</span>
+          </summary>
+          <div class="card-body">
+            <div>
+              <h4>In plain English</h4>
+              <p>
+                Map-centric situational awareness dashboard that aggregates public geopolitical, news and infrastructure signals.
+                Fork of the project created by Elie Habib. All primary credit belongs to the original author.
+              </p>
+              <a class="btn" href="projects/worldmonitor.html">Open full dossier →</a>
+            </div>
+            <div>
+              <h4>Original</h4>
+              <div class="tags">
+                <span class="tag">Elie Habib</span>
+                <span class="tag">OSINT</span>
+                <span class="tag">AGPL-3.0</span>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <div class="card-head">
+              <h3>Shadowbroker</h3>
+              <p class="tagline">Geospatial intelligence platform (fork)</p>
+            </div>
+            <span class="card-badge mono fork">Fork</span>
+          </summary>
+          <div class="card-body">
+            <div>
+              <h4>In plain English</h4>
+              <p>
+                Aggregates many public OSINT feeds (aircraft, ships, satellites, seismic, conflict) onto a single map interface.
+                Fork of the project by BigBodyCobain. Original author retains full credit.
+              </p>
+              <a class="btn" href="projects/shadowbroker.html">Open full dossier →</a>
+            </div>
+            <div>
+              <h4>Original</h4>
+              <div class="tags">
+                <span class="tag">BigBodyCobain</span>
+                <span class="tag">OSINT</span>
+                <span class="tag">AGPL-3.0</span>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="card">
+          <summary>
+            <div class="card-head">
+              <h3>DFW1N-OSINT</h3>
+              <p class="tagline">Australian OSINT resource collection (fork)</p>
+            </div>
+            <span class="card-badge mono fork">Fork</span>
+          </summary>
+          <div class="card-body">
+            <div>
+              <h4>In plain English</h4>
+              <p>
+                Large curated list of Australian-focused open-source intelligence resources for investigators and cyber professionals.
+                Fork of the collection created by Sacha Roussakis-Notter (DFW1N). Full credit to the original curator.
+              </p>
+              <a class="btn" href="projects/dfw1n-osint.html">Open full dossier →</a>
+            </div>
+            <div>
+              <h4>Original</h4>
+              <div class="tags">
+                <span class="tag">DFW1N</span>
+                <span class="tag">Australia</span>
+                <span class="tag">GPL-3.0</span>
+              </div>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </section>
+
     <section>
       <p class="section-label mono">// how I work</p>
       <h2 class="section-title">Trust & approach</h2>
@@ -497,7 +629,7 @@
             phone security tooling (Ghostprint), personal job-search automation (AutoJob), and occasional physics notes (ESFT).
           </p>
           <p style="color: var(--muted); margin: 0;">
-            This site is a living portfolio. Details change as the work does.
+            This site is a living portfolio. Details change as the work does. Forked projects always credit their original authors.
           </p>
         </div>
         <div class="about-box mono" style="font-size: 0.82rem;">
