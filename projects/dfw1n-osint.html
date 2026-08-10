@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DFW1N-OSINT plain-language dossier — Australian OSINT resource list (fork).">
+  <title>DFW1N-OSINT · Vectis Ops</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #03060c; --surface: #0a1019; --accent: #00e5ff; --text: #e8eef7; --muted: #8b9bb4; --border: #1e2a3d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
+      background: radial-gradient(800px 400px at 0% 0%, rgba(0,229,255,.1), transparent 50%), radial-gradient(600px 300px at 100% 10%, rgba(167,139,250,.08), transparent 45%), var(--bg);
+      line-height: 1.7;
+    }
+    .mono { font-family: "Fira Code", monospace; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    a { color: var(--accent); }
+    nav { padding: 1.25rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    nav a { text-decoration: none; color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--accent); }
+    .badge { display: inline-block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(0,229,255,.35); padding: 0.3rem 0.7rem; border-radius: 999px; background: rgba(0,229,255,.08); margin-bottom: 1rem; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); font-weight: 800; margin: 0 0 0.75rem; }
+    .lead { font-size: 1.15rem; color: var(--muted); margin: 0 0 1.75rem; }
+    h2 { font-size: 1.2rem; margin: 2.4rem 0 0.85rem; color: var(--text); font-weight: 700; }
+    p, li { color: var(--muted); }
+    ul { padding-left: 1.25rem; }
+    li { margin-bottom: 0.55rem; }
+    .callout { border-left: 3px solid var(--accent); padding: 1rem 1.15rem; margin: 1.5rem 0; background: rgba(0,229,255,.05); border-radius: 0 10px 10px 0; }
+    .feature { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.2rem; margin: 0.75rem 0; }
+    .feature h3 { margin: 0 0 0.35rem; color: var(--accent); font-size: 1rem; }
+    .feature p { margin: 0; font-size: 0.95rem; }
+    .btn { display: inline-block; margin-top: 0.5rem; padding: 0.7rem 1.15rem; border-radius: 9px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-family: "Fira Code", monospace; font-size: 0.76rem; }
+    .btn:hover { background: var(--accent); color: var(--bg); }
+    footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="mono">
+      <a href="../">← Portfolio</a>
+      <a href="dfw1n-osint-technical.html">Technical deep dive →</a>
+    </nav>
+
+    <div class="badge mono">Fork · Plain language</div>
+    <h1>DFW1N-OSINT</h1>
+    <p class="lead">
+      A large curated collection of Australian-focused open-source intelligence (OSINT) resources for cyber professionals, investigators and ethical researchers.
+    </p>
+
+    <div class="callout">
+      <strong style="color:var(--text)">Attribution:</strong><br>
+      This is a <strong>fork</strong> of <a href="https://github.com/DFW1N/DFW1N-OSINT" target="_blank" rel="noopener">DFW1N/DFW1N-OSINT</a>
+      created and maintained by <strong>Sacha Roussakis-Notter (DFW1N)</strong>.
+      Full credit for the curation and ongoing work belongs to the original author. Vectis Ops keeps this fork for local reference and Australian OSINT work.
+    </div>
+
+    <h2>What it is, in plain English</h2>
+    <p>
+      DFW1N-OSINT is a living list of public Australian data sources, tools and techniques useful for open-source investigations.
+      It is especially useful for people working in or on Australia who need a structured starting point rather than searching from scratch every time.
+    </p>
+
+    <div class="feature">
+      <h3>Australia-centric</h3>
+      <p>Government, corporate, geographic and people-search resources relevant to the Australian context.</p>
+    </div>
+    <div class="feature">
+      <h3>Curated list</h3>
+      <p>Organised collection rather than a single software tool.</p>
+    </div>
+    <div class="feature">
+      <h3>GPL-3.0</h3>
+      <p>Upstream is released under the GNU GPL v3.</p>
+    </div>
+
+    <h2>Honest limits</h2>
+    <ul>
+      <li>This is a fork of a curated resource list, not original research by Vectis Ops.</li>
+      <li>Links and sources go stale; always verify against the live upstream repository.</li>
+      <li>Use only for lawful, ethical purposes and with proper authorisation where required.</li>
+    </ul>
+
+    <h2>Links</h2>
+    <p>
+      Your fork: <a href="https://github.com/vectisops/DFW1N-OSINT" target="_blank" rel="noopener">github.com/vectisops/DFW1N-OSINT</a><br>
+      Upstream: <a href="https://github.com/DFW1N/DFW1N-OSINT" target="_blank" rel="noopener">github.com/DFW1N/DFW1N-OSINT</a> (Sacha Roussakis-Notter)
+    </p>
+
+    <div class="callout">
+      <strong style="color:var(--text)">Technical / licence notes</strong><br>
+      <a class="btn" href="dfw1n-osint-technical.html">Open technical deep dive →</a>
+    </div>
+
+    <footer class="mono">
+      Vectis Operations · August 2026<br>
+      <a href="../">Back to portfolio</a>
+    </footer>
+  </div>
+</body>
+</html>

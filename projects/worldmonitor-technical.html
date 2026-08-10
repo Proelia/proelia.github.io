@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="World Monitor technical deep dive — fork of koala73/worldmonitor by Elie Habib.">
+  <title>World Monitor Technical · Vectis Ops</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #03060c; --surface: #0a1019; --accent: #00e5ff; --pink: #f472b6;
+      --text: #e8eef7; --muted: #8b9bb4; --border: #1e2a3d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--text);
+      background: radial-gradient(800px 400px at 0% 0%, rgba(0,229,255,.1), transparent 50%), var(--bg);
+      line-height: 1.65;
+    }
+    .mono { font-family: "Fira Code", monospace; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    a { color: var(--accent); }
+    nav { padding: 1.25rem 0; border-bottom: 1px solid var(--border); margin-bottom: 2.5rem; display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    nav a { text-decoration: none; color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--accent); }
+    .badge { display: inline-block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); border: 1px solid rgba(244,114,182,.4); padding: 0.3rem 0.7rem; border-radius: 999px; background: rgba(244,114,182,.08); margin-bottom: 1rem; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.5rem); font-weight: 800; margin: 0 0 0.75rem; }
+    .lead { font-size: 1.05rem; color: var(--muted); margin: 0 0 1.75rem; }
+    h2 { font-size: 1.1rem; margin: 2.25rem 0 0.75rem; color: var(--accent); }
+    p, li { color: var(--muted); }
+    ul { padding-left: 1.2rem; }
+    .callout { border-left: 3px solid var(--pink); padding: 0.9rem 1.1rem; margin: 1.5rem 0; background: rgba(244,114,182,.06); border-radius: 0 10px 10px 0; }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.1rem; overflow-x: auto; font-size: 0.78rem; color: var(--text); font-family: "Fira Code", monospace; line-height: 1.5; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
+    .tag { font-size: 0.68rem; font-family: "Fira Code", monospace; padding: 0.25rem 0.55rem; border: 1px solid var(--border); border-radius: 4px; color: var(--accent); }
+    footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="mono">
+      <a href="worldmonitor.html">← Plain-language dossier</a>
+      <a href="../">Portfolio</a>
+    </nav>
+
+    <div class="badge mono">Technical deep dive · Fork</div>
+    <h1>World Monitor — technical notes</h1>
+    <p class="lead">Fork of the large open-source OSINT dashboard originally created by Elie Habib.</p>
+
+    <div class="callout">
+      <strong style="color:var(--text)">Required credit:</strong><br>
+      Original project: <a href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener">koala73/worldmonitor</a> by <strong>Elie Habib</strong>.<br>
+      Licence upstream is AGPL-3.0-only. Any network-accessible modifications must comply with AGPL source-sharing requirements. Retain all copyright notices.
+    </div>
+
+    <h2>Orientation</h2>
+    <p>
+      World Monitor is a substantial TypeScript-based dashboard that ingests many public data sources and presents them on a map-centric interface.
+      The upstream repository is actively developed and has a large community. This fork is kept for local inspection and self-hosting trials under Vectis Ops.
+    </p>
+
+    <h2>Typical starting path</h2>
+    <pre>git clone https://github.com/vectisops/worldmonitor.git
+cd worldmonitor
+npm install
+npm run dev
+# Prefer upstream README for current build / deploy instructions</pre>
+
+    <h2>Licence & attribution rules</h2>
+    <ul>
+      <li>Keep original copyright and licence files intact.</li>
+      <li>If you serve a modified version to others over a network, provide corresponding source under AGPL-3.0-only.</li>
+      <li>Do not rebrand the project as an original Vectis Ops product.</li>
+    </ul>
+
+    <p>
+      Fork: <a href="https://github.com/vectisops/worldmonitor" target="_blank" rel="noopener">vectisops/worldmonitor</a><br>
+      Upstream: <a href="https://github.com/koala73/worldmonitor" target="_blank" rel="noopener">koala73/worldmonitor</a>
+    </p>
+
+    <div class="tags">
+      <span class="tag">Fork</span><span class="tag">OSINT</span><span class="tag">AGPL-3.0</span><span class="tag">Dashboard</span>
+    </div>
+
+    <footer class="mono">
+      Vectis Operations · August 2026<br>
+      <a href="worldmonitor.html">Plain dossier</a> · <a href="../">Portfolio</a>
+    </footer>
+  </div>
+</body>
+</html>
